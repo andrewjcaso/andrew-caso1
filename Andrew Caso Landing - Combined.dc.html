@@ -2,6 +2,7 @@
 <html>
 <head>
 <meta charset="utf-8">
+<style>html,body{margin:0;background:#0a0a0a;color:#f4f1ea}</style>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="./support.js"></script>
 <template id="__bundler_thumbnail" data-bg-color="#0a0a0a">
@@ -17,9 +18,14 @@
 <helmet>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&amp;family=Space+Mono:ital,wght@0,400;0,700;1,400&amp;family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300&amp;display=swap" rel="stylesheet">
 <script src="image-slot.js"></script>
+<link rel="preload" as="font" type="font/ttf" href="assets/fonts/Staatliches-Regular.ttf" crossorigin="">
+<link rel="preload" as="font" type="font/ttf" href="assets/fonts/Gudea-Regular.ttf" crossorigin="">
 <style>
+  @font-face { font-family:'Staatliches'; src:url('assets/fonts/Staatliches-Regular.ttf') format('truetype'); font-weight:400; font-display:block; }
+  @font-face { font-family:'Gudea'; src:url('assets/fonts/Gudea-Regular.ttf') format('truetype'); font-weight:400; font-style:normal; font-display:block; }
+  @font-face { font-family:'Gudea'; src:url('assets/fonts/Gudea-Bold.ttf') format('truetype'); font-weight:700; font-style:normal; font-display:block; }
+  @font-face { font-family:'Gudea'; src:url('assets/fonts/Gudea-Italic.ttf') format('truetype'); font-weight:400; font-style:italic; font-display:block; }
   * { box-sizing: border-box; }
   html, body { margin: 0; background: #0a0a0a; }
   a { color: #f4f1ea; text-decoration: none; }
@@ -73,10 +79,14 @@
     [data-m~="work"] { padding-bottom: 120px !important; }
     h1 { overflow-wrap: anywhere; }
   }
+  @keyframes pagein { from { opacity:0; } to { opacity:1; } }
+  @keyframes titlein { from { opacity:0; transform:translateY(14px); } to { opacity:1; transform:none; } }
+  h1 { animation: titlein 1.1s cubic-bezier(0.2,0.6,0.2,1) 150ms both; }
+  @media (prefers-reduced-motion: reduce) { h1, [data-pagein] { animation: none !important; } }
 </style>
 </helmet>
 
-<div style="background:#0a0a0a;color:#f4f1ea;font-family:'Archivo',sans-serif;min-height:100vh;">
+<div data-pagein="" style="animation:pagein 1.2s cubic-bezier(0.2,0.6,0.2,1) both;background:#0a0a0a;color:#f4f1ea;font-family:'Gudea',sans-serif;min-height:100vh;">
 
   <!-- scroll progress hairline -->
   <div aria-hidden="true" style="position:fixed;top:0;left:0;right:0;height:2px;z-index:50;background:transparent;">
@@ -87,9 +97,9 @@
   <div data-m="nav pad" style="display:flex;justify-content:space-between;align-items:center;padding:22px 40px;border-bottom:1px solid #1f1f1f;">
     <a href="#top" style="display:flex;align-items:center;gap:12px;">
       <img src="assets/logo-mark.png" alt="" style="width:34px;height:34px;object-fit:contain;">
-      <span style="font-family:'Archivo',sans-serif;font-weight:900;font-stretch:112%;font-size:20px;letter-spacing:-0.02em;text-transform:uppercase;">K.SO<span style="color:#d70015;">*</span></span>
+      <span style="font-family:'Staatliches',sans-serif;font-weight:400;-webkit-text-stroke:0.028em currentColor;paint-order:stroke fill;font-size:25px;letter-spacing:0.015em;text-transform:uppercase;">K.SO<span style="color:#d70015;">*</span></span>
     </a>
-    <div data-m="navlinks" style="display:flex;gap:26px;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:#b8b3a7;">
+    <div data-m="navlinks" style="display:flex;gap:26px;font-family:'Gudea',sans-serif;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:#b8b3a7;">
       <a href="Commercial/Commercial.dc.html">Commercial</a>
       <a href="Photoshoot/Photoshoot.dc.html">Photo</a>
       <a href="Music Videos/Music Videos.dc.html">Video</a>
@@ -105,12 +115,12 @@
       <div style="position:absolute;left:6%;top:24%;width:48%;height:70%;background:radial-gradient(closest-side, rgba(215,0,21,0.42), rgba(215,0,21,0) 72%);filter:blur(48px);transform-origin:center;animation:khaze 9s ease-in-out infinite;"></div>
       
     </div>
-    <span data-m="cl" style="position:absolute;top:34px;left:40px;z-index:2;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.18em;color:#d70015;">K.SO / LOS ANGELES</span>
-    <span data-m="cr" style="position:absolute;top:34px;right:40px;z-index:2;display:flex;align-items:center;gap:8px;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.18em;color:#d70015;"><span style="width:6px;height:6px;background:#d70015;border-radius:999px;animation:kblink 2s ease-in-out infinite;"></span>{{ clock }}</span>
+    <span data-m="cl" style="position:absolute;top:34px;left:40px;z-index:2;font-family:'Gudea',sans-serif;font-size:11px;letter-spacing:0.18em;color:#d70015;">K.SO / LOS ANGELES</span>
+    <span data-m="cr" style="position:absolute;top:34px;right:40px;z-index:2;display:flex;align-items:center;gap:8px;font-family:'Gudea',sans-serif;font-size:11px;letter-spacing:0.18em;color:#d70015;"><span style="width:6px;height:6px;background:#d70015;border-radius:999px;animation:kblink 2s ease-in-out infinite;"></span>{{ clock }}</span>
     <!-- crosshair ticks framing the hero -->
-    <span aria-hidden="true" data-m="cl" style="position:absolute;bottom:28px;left:40px;z-index:2;font-family:'Space Mono',monospace;font-size:14px;color:#2a2a2a;">+</span>
-    <span aria-hidden="true" data-m="cr" style="position:absolute;bottom:28px;right:40px;z-index:2;font-family:'Space Mono',monospace;font-size:14px;color:#2a2a2a;">+</span>
-    <pre aria-hidden="true" style="position:absolute;top:88px;right:5%;z-index:1;margin:0;font-family:'Space Mono',monospace;font-size:10px;line-height:1.15;color:#f4f1ea;opacity:0.28;filter:blur(3px);white-space:pre;pointer-events:none;user-select:none;animation:kup 600ms cubic-bezier(0.2,0.7,0.2,1) 180ms both;">                      +OOz'
+    <span aria-hidden="true" data-m="cl" style="position:absolute;bottom:28px;left:40px;z-index:2;font-family:'Gudea',sans-serif;font-size:14px;color:#2a2a2a;">+</span>
+    <span aria-hidden="true" data-m="cr" style="position:absolute;bottom:28px;right:40px;z-index:2;font-family:'Gudea',sans-serif;font-size:14px;color:#2a2a2a;">+</span>
+    <pre aria-hidden="true" style="position:absolute;top:88px;right:5%;z-index:1;margin:0;font-family:ui-monospace,Menlo,monospace;font-size:10px;line-height:1.15;color:#f4f1ea;opacity:0.28;filter:blur(3px);white-space:pre;pointer-events:none;user-select:none;animation:kup 600ms cubic-bezier(0.2,0.7,0.2,1) 180ms both;">                      +OOz'
                      z####O
           .         .@####$         .:'
        .z@#@o:      u#####@u;     :o@##O'
@@ -134,7 +144,7 @@
                     :######0:
                      o####0.
                       .;:.</pre>
-    <h1 style="position:relative;z-index:1;font-family:'Archivo',sans-serif;font-weight:900;font-stretch:112%;text-transform:uppercase;font-size:clamp(64px,13vw,160px);line-height:0.84;letter-spacing:-0.04em;margin:0;">
+    <h1 style="position:relative;z-index:1;font-family:'Staatliches',sans-serif;font-weight:400;-webkit-text-stroke:0.028em currentColor;paint-order:stroke fill;text-transform:uppercase;font-size:clamp(80px,16.3vw,200px);line-height:0.84;letter-spacing:0.015em;margin:0;">
       <span style="display:block;animation:kup 560ms cubic-bezier(0.2,0.7,0.2,1) 40ms both;">Andrew</span>
       <span style="display:block;animation:kup 560ms cubic-bezier(0.2,0.7,0.2,1) 120ms both;">Caso<span style="color:#d70015;">.</span></span>
     </h1>
@@ -144,13 +154,13 @@
     </p>
     <div style="display:flex;justify-content:flex-end;margin-top:28px;animation:kup 600ms cubic-bezier(0.2,0.7,0.2,1) 260ms both;position:relative;z-index:20;">
       <div onMouseEnter="{{ workMenuEnter }}" onMouseLeave="{{ workMenuLeave }}" style="position:relative;z-index:3;">
-        <span style="display:block;cursor:pointer;font-family:'Space Mono',monospace;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;color:#f4f1ea;border:1px solid #2a2a2a;padding:14px 26px;transition:all 120ms cubic-bezier(0.2,0.7,0.2,1);" style-hover="background:#d70015;border-color:#d70015;">View past projects {{ workMenuGlyph }}</span>
+        <span style="display:block;cursor:pointer;font-family:'Gudea',sans-serif;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;color:#f4f1ea;border:1px solid #2a2a2a;padding:14px 26px;transition:all 120ms cubic-bezier(0.2,0.7,0.2,1);" style-hover="background:#d70015;border-color:#d70015;">View past projects {{ workMenuGlyph }}</span>
         <sc-if value="{{ workMenuOpen }}" hint-placeholder-val="{{ false }}">
           <div style="position:absolute;top:100%;right:0;min-width:100%;background:#0a0a0a;border:1px solid #2a2a2a;border-top:0;display:flex;flex-direction:column;">
-            <a href="Commercial/Commercial.dc.html" style="display:block;white-space:nowrap;font-family:'Space Mono',monospace;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;color:#f4f1ea;padding:13px 26px;border-bottom:1px solid #1f1f1f;" style-hover="background:#d70015;color:#f4f1ea;">Commercial</a>
-            <a href="Photoshoot/Photoshoot.dc.html" style="display:block;white-space:nowrap;font-family:'Space Mono',monospace;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;color:#f4f1ea;padding:13px 26px;border-bottom:1px solid #1f1f1f;" style-hover="background:#d70015;color:#f4f1ea;">Photo</a>
-            <a href="Music Videos/Music Videos.dc.html" style="display:block;white-space:nowrap;font-family:'Space Mono',monospace;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;color:#f4f1ea;padding:13px 26px;border-bottom:1px solid #1f1f1f;" style-hover="background:#d70015;color:#f4f1ea;">Video</a>
-            <a href="Creative Direction/Creative Direction.dc.html" style="display:block;white-space:nowrap;font-family:'Space Mono',monospace;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;color:#f4f1ea;padding:13px 26px;" style-hover="background:#d70015;color:#f4f1ea;">Creative Direction</a>
+            <a href="Commercial/Commercial.dc.html" style="display:block;white-space:nowrap;font-family:'Gudea',sans-serif;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;color:#f4f1ea;padding:13px 26px;border-bottom:1px solid #1f1f1f;" style-hover="background:#d70015;color:#f4f1ea;">Commercial</a>
+            <a href="Photoshoot/Photoshoot.dc.html" style="display:block;white-space:nowrap;font-family:'Gudea',sans-serif;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;color:#f4f1ea;padding:13px 26px;border-bottom:1px solid #1f1f1f;" style-hover="background:#d70015;color:#f4f1ea;">Photo</a>
+            <a href="Music Videos/Music Videos.dc.html" style="display:block;white-space:nowrap;font-family:'Gudea',sans-serif;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;color:#f4f1ea;padding:13px 26px;border-bottom:1px solid #1f1f1f;" style-hover="background:#d70015;color:#f4f1ea;">Video</a>
+            <a href="Creative Direction/Creative Direction.dc.html" style="display:block;white-space:nowrap;font-family:'Gudea',sans-serif;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;color:#f4f1ea;padding:13px 26px;" style-hover="background:#d70015;color:#f4f1ea;">Creative Direction</a>
           </div>
         </sc-if>
       </div>
@@ -162,10 +172,10 @@
   <!-- selected work grid -->
   <div id="work" data-m="pad work" style="position:relative;padding:0 40px 260px 72px;">
     <!-- vertical section label -->
-    <span aria-hidden="true" data-m="hide" style="position:absolute;left:28px;top:120px;transform:rotate(180deg);writing-mode:vertical-rl;font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.3em;text-transform:uppercase;color:#4a4640;">Production Design — Los Angeles</span>
+    <span aria-hidden="true" data-m="hide" style="position:absolute;left:28px;top:120px;transform:rotate(180deg);writing-mode:vertical-rl;font-family:'Gudea',sans-serif;font-size:10px;letter-spacing:0.3em;text-transform:uppercase;color:#4a4640;">Production Design — Los Angeles</span>
     <div data-reveal="1" data-m="sb" style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:20px;">
-      <span style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;color:#b8b3a7;">Selected Work</span>
-      <span style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#d70015;">'19 — '26</span>
+      <span style="font-family:'Gudea',sans-serif;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;color:#b8b3a7;">Selected Work</span>
+      <span style="font-family:'Gudea',sans-serif;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#d70015;">'19 — '26</span>
     </div>
     <div data-reveal="1" data-m="g1" style="display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:#1f1f1f;border:1px solid #1f1f1f;">
       <sc-for list="{{ aWorks }}" as="w" hint-placeholder-count="6">
@@ -178,8 +188,8 @@
               <div style="{{ w.crestStyle }}"></div>
             </div>
             <div style="display:flex;flex-direction:column;gap:8px;padding:14px;">
-              <span style="font-family:'Archivo',sans-serif;font-weight:900;font-stretch:112%;text-transform:uppercase;font-size:15px;line-height:1.05;letter-spacing:-0.01em;color:#f4f1ea;">{{ w.title }}</span>
-              <div style="display:flex;justify-content:space-between;font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:#d70015;">
+              <span style="font-family:'Staatliches',sans-serif;font-weight:400;-webkit-text-stroke:0.028em currentColor;paint-order:stroke fill;text-transform:uppercase;font-size:19px;line-height:1.05;letter-spacing:0.015em;color:#f4f1ea;">{{ w.title }}</span>
+              <div style="display:flex;justify-content:space-between;font-family:'Gudea',sans-serif;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:#d70015;">
                 <span style="color:#b8b3a7;">{{ w.cat }}</span>
                 <span>NO. {{ w.no }}</span>
               </div>
@@ -197,21 +207,21 @@
       <image-slot id="c-portrait" shape="rect" placeholder="Portrait / process shot" style="width:100%;height:100%;display:block;"></image-slot>
     </div>
     <div data-reveal="1" data-m="pad" style="padding:64px 40px 64px 20px;">
-      <span style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;color:#d70015;">About</span>
-      <p style="font-family:'Archivo',sans-serif;font-weight:900;font-stretch:112%;text-transform:uppercase;font-size:34px;line-height:1.02;letter-spacing:-0.02em;color:#f4f1ea;margin:22px 0 24px;max-width:808px;">2025 HVMAS Production Designer of the Year Nominee&nbsp;</p>
+      <span style="font-family:'Gudea',sans-serif;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;color:#d70015;">About</span>
+      <p style="font-family:'Staatliches',sans-serif;font-weight:400;-webkit-text-stroke:0.028em currentColor;paint-order:stroke fill;text-transform:uppercase;font-size:43px;line-height:1.02;letter-spacing:0.015em;color:#f4f1ea;margin:22px 0 24px;max-width:808px;">2025 HVMAS Production Designer of the Year Nominee&nbsp;</p>
       <p style="font-size:17px;line-height:1.7;color:#b8b3a7;margin:0 0 28px;max-width:748px;">Working across creative direction and production design to shape environments, objects, and moments that give brands and artists a world of their own.</p>
-      <a href="About.dc.html" style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;color:#f4f1ea;border-bottom:1px solid #2a2a2a;">→ About Andrew</a>
+      <a href="About.dc.html" style="font-family:'Gudea',sans-serif;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;color:#f4f1ea;border-bottom:1px solid #2a2a2a;">→ About Andrew</a>
     </div>
   </div>
 
   <!-- footer / contact -->
   <div id="contact" data-m="pad" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px;padding:34px 40px;border-top:1px solid #1f1f1f;">
-    <a href="mailto:andrewjcaso@gmail.com" style="font-family:'Archivo',sans-serif;font-weight:900;font-stretch:112%;text-transform:uppercase;font-size:clamp(20px,3vw,26px);letter-spacing:-0.02em;">andrewjcaso@gmail.com</a>
-    <div style="display:flex;gap:22px;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:#b8b3a7;">
+    <a href="mailto:andrewjcaso@gmail.com" style="font-family:'Staatliches',sans-serif;font-weight:400;-webkit-text-stroke:0.028em currentColor;paint-order:stroke fill;text-transform:uppercase;font-size:clamp(25px,3.8vw,33px);letter-spacing:0.015em;">andrewjcaso@gmail.com</a>
+    <div style="display:flex;gap:22px;font-family:'Gudea',sans-serif;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:#b8b3a7;">
       <a href="https://www.instagram.com/andrewcaso/">Instagram</a>
       <a href="https://www.linkedin.com/in/andrew-caso-229284204">LinkedIn</a>
     </div>
-    <span style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.14em;color:#d70015;">© '26 K.SO<span style="color:#d70015;">*</span> — LOS ANGELES</span>
+    <span style="font-family:'Gudea',sans-serif;font-size:10px;letter-spacing:0.14em;color:#d70015;">© '26 K.SO<span style="color:#d70015;">*</span> — LOS ANGELES</span>
   </div>
 
 </div>
