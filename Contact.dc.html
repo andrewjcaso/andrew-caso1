@@ -139,14 +139,6 @@
             <label style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:#d70015;">Message</label>
             <textarea value="{{ msg }}" onInput="{{ onMsg }}" rows="5" placeholder="Dates, scope, references…" style="background:#0a0a0a;border:1px solid #2a2a2a;color:#f4f1ea;padding:13px 14px;font-size:15px;border-radius:0;resize:vertical;"></textarea>
           </div>
-          <div style="display:flex;flex-direction:column;gap:8px;">
-            <label style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:#d70015;">Attachment</label>
-            <label style="display:flex;align-items:center;gap:14px;background:#0a0a0a;border:1px solid #2a2a2a;padding:11px 14px;cursor:pointer;" style-hover="border-color:#d70015;">
-              <span style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#f4f1ea;border:1px solid #2a2a2a;padding:7px 13px;">Choose file</span>
-              <span style="font-size:14px;color:#6b675f;">{{ fileName }}</span>
-              <input type="file" onChange="{{ onFile }}" style="display:none;" />
-            </label>
-          </div>
           <button onClick="{{ onSend }}" disabled="{{ sending }}" style="align-self:flex-start;font-family:'Space Mono',monospace;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;color:#f4f1ea;background:#0a0a0a;border:1px solid #2a2a2a;padding:15px 30px;cursor:pointer;transition:all 120ms cubic-bezier(0.2,0.7,0.2,1);" style-hover="background:#d70015;border-color:#d70015;">{{ btnLabel }}</button>
           <sc-if value="{{ error }}" hint-placeholder-val="{{ false }}">
             <span style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:#d70015;">{{ error }}</span>
@@ -164,19 +156,9 @@
 
 </div>
 </x-dc>
-<!-- Netlify Forms detection stub: Netlify scans static HTML at deploy time, so the
-     real (JS-rendered) form above submits to this declared form via fetch. -->
-<form name="enquiry" data-netlify="true" netlify-honeypot="bot-field" enctype="multipart/form-data" hidden="hidden" style="display:none;">
-  <input type="text" name="name" />
-  <input type="email" name="email" />
-  <input type="text" name="project-type" />
-  <textarea name="message"></textarea>
-  <input type="file" name="attachment" />
-  <input type="text" name="bot-field" />
-</form>
 <script type="text/x-dc" data-dc-script>
 class Component extends DCLogic {
-  state = { clock: '', name: '', email: '', ptype: 'Commercial', msg: '', fileName: 'No file selected', file: null, sent: false, sending: false, error: '' };
+  state = { clock: '', name: '', email: '', ptype: 'Commercial', msg: '', sent: false, sending: false, error: '' };
 
   componentDidMount() {
     const p = (n) => String(n).padStart(2, '0');
@@ -196,37 +178,26 @@ class Component extends DCLogic {
       onEmail: (e) => this.setState({ email: e.target.value }),
       onType: (e) => this.setState({ ptype: e.target.value }),
       onMsg: (e) => this.setState({ msg: e.target.value }),
-      fileName: this.state.fileName,
       sending: this.state.sending,
       error: this.state.error,
       btnLabel: this.state.sending ? 'Sending…' : 'Send enquiry →',
       sentMsg: this.state.sentMsg || "Thanks — your enquiry is on its way to andrewjcaso@gmail.com. I'll reply shortly.",
-      onFile: (e) => {
-        const f = e.target.files && e.target.files[0];
-        this.setState({ file: f || null, fileName: f ? f.name : 'No file selected' });
-      },
       onSend: async () => {
-        const { name, email, ptype, msg, file, sending } = this.state;
+        const { name, email, ptype, msg, sending } = this.state;
         if (sending) return;
         if (!name.trim() || !email.trim() || !msg.trim()) {
           this.setState({ error: 'Name, email and message are required.' });
           return;
         }
-        // No Netlify backend when opened from disk / the design preview
-        if (location.protocol === 'file:') {
-          this.setState({ sent: true, sentMsg: 'Preview only — no server here. Once deployed to Netlify this routes to andrewjcaso@gmail.com.' });
-          return;
-        }
         this.setState({ sending: true, error: '' });
         const fd = new FormData();
-        fd.append('form-name', 'enquiry');
+        fd.append('_subject', 'K.SO enquiry — ' + ptype + ' — ' + name);
         fd.append('name', name);
         fd.append('email', email);
         fd.append('project-type', ptype);
         fd.append('message', msg);
-        if (file) fd.append('attachment', file);
         try {
-          const r = await fetch('/', { method: 'POST', body: fd });
+          const r = await fetch('https://formspree.io/f/xkjgraea', { method: 'POST', body: fd, headers: { 'Accept': 'application/json' } });
           if (!r.ok) throw new Error(r.status);
           this.setState({ sending: false, sent: true, sentMsg: '' });
         } catch (err) {
