@@ -60,8 +60,8 @@
     <div data-m="navlinks" style="display:flex;gap:26px;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:#f4f1ea;">
       <a href="Andrew Caso Landing - Combined.dc.html">Home</a>
       <a href="Commercial/Commercial.dc.html">Commercial</a>
-      <a href="Photoshoot/Photoshoot.dc.html">Photoshoot</a>
-      <a href="Music Videos/Music Videos.dc.html">Music Videos</a>
+      <a href="Photoshoot/Photoshoot.dc.html">Photo</a>
+      <a href="Music Videos/Music Videos.dc.html">Video</a>
       <a href="Creative Direction/Creative Direction.dc.html">Creative Direction</a>
       <a href="Contact.dc.html" style="color:#d70015;">Contact</a>
     </div>
@@ -100,9 +100,9 @@
       </div>
     </div>
 
-    <!-- right: enquiry form -->
+    <!-- right: inquiry form -->
     <div data-m="pad" style="padding:56px 40px;background:#0c0c0c;">
-      <span style="display:block;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:#d70015;margin-bottom:8px;">Project enquiry</span>
+      <span style="display:block;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:#d70015;margin-bottom:8px;">Project inquiry</span>
       <p style="font-family:'Archivo',sans-serif;font-weight:400;font-size:24px;line-height:1.32;letter-spacing:-0.01em;color:#f4f1ea;margin:0 0 32px;max-width:480px;text-wrap:pretty;">Tell me about the shoot, dates, scope, and the world you want to build.</p>
 
       <sc-if value="{{ sent }}" hint-placeholder-val="{{ false }}">
@@ -186,7 +186,7 @@ class Component extends DCLogic {
       onMsg: (e) => this.setState({ msg: e.target.value }),
       sending: this.state.sending,
       error: this.state.error,
-      btnLabel: this.state.sending ? 'Sending…' : 'Send enquiry →',
+      btnLabel: this.state.sending ? 'Sending…' : 'Send inquiry →',
       sentMsg: this.state.sentMsg || "Thank you for reaching out, Excited to hear about your project. Ill reply shortly!",
       onSend: async () => {
         const { name, email, ptype, msg, sending } = this.state;
@@ -197,7 +197,7 @@ class Component extends DCLogic {
         }
         this.setState({ sending: true, error: '' });
         const fd = new FormData();
-        fd.append('_subject', 'K.SO enquiry — ' + ptype + ' — ' + name);
+        fd.append('_subject', 'K.SO inquiry — ' + ptype + ' — ' + name);
         fd.append('name', name);
         fd.append('email', email);
         fd.append('project-type', ptype);

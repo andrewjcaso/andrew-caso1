@@ -58,8 +58,8 @@
     <div data-m="navlinks" style="display:flex;gap:26px;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:#f4f1ea;">
       <a href="../Andrew Caso Landing - Combined.dc.html">Home</a>
       <a href="../Commercial/Commercial.dc.html">Commercial</a>
-      <a href="Photoshoot.dc.html" style="color:#d70015;">Photoshoot</a>
-      <a href="../Music Videos/Music Videos.dc.html">Music Videos</a>
+      <a href="Photoshoot.dc.html" style="color:#d70015;">Photo</a>
+      <a href="../Music Videos/Music Videos.dc.html">Video</a>
       <a href="../Creative Direction/Creative Direction.dc.html">Creative Direction</a>
       <a href="../Contact.dc.html">Contact</a>
     </div>
@@ -69,7 +69,7 @@
   <div data-m="pad" style="position:relative;padding:72px 40px 36px;">
     <span data-m="cl" style="position:absolute;top:30px;left:40px;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.18em;color:#d70015;">K.SO / NO. 03 — PRODUCTION DESIGN</span>
     <span data-m="cr" style="position:absolute;top:30px;right:40px;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.18em;color:#d70015;">{{ clock }}</span>
-    <h1 style="font-family:'Archivo',sans-serif;font-weight:900;font-stretch:112%;text-transform:uppercase;font-size:clamp(46px,8.4vw,110px);line-height:0.84;letter-spacing:-0.04em;margin:0;">Photoshoot<span style="color:#d70015;">.</span></h1>
+    <h1 style="font-family:'Archivo',sans-serif;font-weight:900;font-stretch:112%;text-transform:uppercase;font-size:clamp(46px,8.4vw,110px);line-height:0.84;letter-spacing:-0.04em;margin:0;">Photo<span style="color:#d70015;">.</span></h1>
   </div>
 
   <!-- subhead -->
@@ -177,7 +177,7 @@ class Component extends DCLogic {
     return {
       clock: this.state.clock,
       works,
-      shownStr: `Showing ${String(this.PROJECTS.length).padStart(2, '0')} — Photoshoot`,
+      shownStr: `Showing ${String(this.PROJECTS.length).padStart(2, '0')} — Photo`,
       detailOpen: idx !== null,
       active,
       activePos: idx !== null ? String(idx + 1).padStart(2, '0') : '00',
