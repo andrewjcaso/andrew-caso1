@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&amp;family=Space+Mono:ital,wght@0,400;0,700;1,400&amp;family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300&amp;display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: #0a0a0a; }
+  a { color: #f4f1ea; text-decoration: none; }
+  a:hover { color: #d70015; }
+
+  /* scroll-reveal — only active once JS sets data-motion on the root */
+  [data-motion] [data-reveal] {
+    opacity: 0;
+    transform: translateY(48px);
+    transition: opacity 1100ms cubic-bezier(.16,1,.3,1), transform 1100ms cubic-bezier(.16,1,.3,1);
+    will-change: opacity, transform;
+  }
+  [data-motion] [data-reveal="img2"] { transition-delay: 170ms; }
+  [data-motion] [data-reveal="cap"],
+  [data-motion] [data-reveal="cap2"] {
+    transform: translateY(20px);
+    transition-duration: 900ms;
+    transition-delay: 340ms;
+  }
+  [data-motion] [data-reveal="cap2"] { transition-delay: 510ms; }
+  [data-motion] [data-reveal="lead"] {
+    transform: translateY(76px);
+    filter: blur(9px);
+    transition: opacity 1500ms cubic-bezier(.16,1,.3,1), transform 1500ms cubic-bezier(.16,1,.3,1), filter 1150ms cubic-bezier(.16,1,.3,1);
+    transition-delay: 260ms;
+  }
+  [data-motion] [data-shown] [data-reveal] { opacity: 1; transform: translateY(0); }
+  [data-motion] [data-shown] [data-reveal="lead"] { filter: blur(0); }
+  @media (prefers-reduced-motion: reduce) {
+    [data-motion] [data-reveal] { opacity: 1; transform: none; transition: none; }
+  }
+
+  /* phone carousel — index lives on data-i, written by JS so the clock re-render can't reset it */
+  [data-phone] [data-shot] { opacity: 0; transition: opacity 420ms ease; }
+  [data-phone]:not([data-i]) [data-shot="0"] { opacity: 1; }
+  [data-phone][data-i="0"] [data-shot="0"],
+  [data-phone][data-i="1"] [data-shot="1"],
+  [data-phone][data-i="2"] [data-shot="2"] { opacity: 1; }
+  [data-phone] [data-dot] { background: #3a3a3a; transition: background 260ms ease; }
+  [data-phone]:not([data-i]) [data-dot="0"],
+  [data-phone][data-i="0"] [data-dot="0"],
+  [data-phone][data-i="1"] [data-dot="1"],
+  [data-phone][data-i="2"] [data-dot="2"] { background: #d70015; }
+  [data-phone] [data-arrow]:hover { color: #d70015; border-color: #d70015; }
+
+  /* phone layout (<=720px) — desktop untouched */
+  @media (max-width: 720px) {
+    [data-m~="pad"] { padding-left: 20px !important; padding-right: 20px !important; }
+    [data-m~="cl"] { left: 20px !important; }
+    [data-m~="cr"] { right: 20px !important; }
+    [data-m~="nav"] { flex-wrap: wrap !important; gap: 14px 20px !important; padding-top: 16px !important; padding-bottom: 16px !important; }
+    [data-m~="navlinks"] { flex-wrap: wrap !important; gap: 10px 16px !important; width: 100% !important; font-size: 10px !important; }
+    [data-m~="sb"] { flex-wrap: wrap !important; gap: 6px 16px !important; }
+    [data-m~="sb"] > * { white-space: normal !important; }
+    [data-m~="stack"] { grid-template-columns: minmax(0,1fr) !important; }
+    [data-m~="stack"] > div:empty { display: none !important; }
+    [data-m~="nbr"] { border-right: 0 !important; border-bottom: 1px solid #1f1f1f !important; }
+    [data-m~="ph"] { min-height: 0 !important; height: auto !important; }
+    [data-m~="g1"] { grid-template-columns: minmax(0,1fr) !important; }
+    [data-m~="g2"] { grid-template-columns: repeat(2, minmax(0,1fr)) !important; gap: 10px !important; }
+    [data-m~="clients"] { grid-template-columns: repeat(2, minmax(0,1fr)) !important; }
+    [data-m~="pn"] > a > span:last-child { font-size: 16px !important; }
+    [data-m~="frames"] { gap: 56px !important; padding-top: 48px !important; padding-bottom: 56px !important; }
+    [data-reveal-block] { grid-template-columns: minmax(0,1fr) !important; width: 100% !important; gap: 12px !important; justify-content: stretch !important; }
+    [data-reveal-block] > * { grid-column: auto !important; }
+    [data-reveal-block] > [data-reveal="cap"]:first-child, [data-reveal-block] > :first-child:has([data-reveal="cap"]) { order: 2; padding-bottom: 0 !important; }
+    [data-m~="hide"], pre[aria-hidden] { display: none !important; }
+    [data-m~="work"] { padding-bottom: 120px !important; }
+    h1 { overflow-wrap: anywhere; }
+  }
+</style>
+</helmet>
+
+<div data-motion-root="" style="background:#0a0a0a;color:#f4f1ea;font-family:'Archivo',sans-serif;min-height:100vh;">
+
+  <div data-m="nav pad" style="display:flex;justify-content:space-between;align-items:center;padding:22px 40px;border-bottom:1px solid #1f1f1f;">
+    <a href="../Andrew Caso Landing - Combined.dc.html" style="display:flex;align-items:center;gap:12px;">
+      <img src="../assets/logo-mark.png" alt="" style="width:34px;height:34px;object-fit:contain;">
+      <span style="font-family:'Archivo',sans-serif;font-weight:900;font-stretch:112%;font-size:20px;letter-spacing:-0.02em;text-transform:uppercase;">K.SO<span style="color:#d70015;">*</span></span>
+    </a>
+    <div data-m="navlinks" style="display:flex;gap:26px;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:#f4f1ea;">
+      <a href="../Andrew Caso Landing - Combined.dc.html">Home</a>
+      <a href="../Commercial/Commercial.dc.html">Commercial</a>
+      <a href="../Photoshoot/Photoshoot.dc.html">Photoshoot</a>
+      <a href="../Music Videos/Music Videos.dc.html">Music Videos</a>
+      <a href="Creative Direction.dc.html" style="color:#d70015;">Creative Direction</a>
+      <a href="../Contact.dc.html">Contact</a>
+    </div>
+  </div>
+
+  <div data-m="pad" style="position:relative;padding:34px 40px 30px;border-bottom:1px solid #1f1f1f;">
+    <div style="display:flex;justify-content:space-between;align-items:center;">
+      <a href="Creative Direction.dc.html" style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:#f4f1ea;">← Creative Direction</a>
+      <span style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.18em;color:#d70015;">{{ clock }}</span>
+    </div>
+  </div>
+
+  <div data-m="pad" style="padding:80px 40px 56px;">
+    <h1 style="font-family:'Archivo',sans-serif;font-weight:900;font-stretch:112%;text-transform:uppercase;font-size:clamp(44px,8vw,104px);line-height:0.86;letter-spacing:-0.04em;margin:0;max-width:15ch;">Streamer University '26<span style="color:#d70015;">.</span></h1>
+  </div>
+
+  <div data-m="stack" style="display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:#1f1f1f;border-top:1px solid #1f1f1f;border-bottom:1px solid #1f1f1f;">
+    <div data-m="pad" style="background:#0a0a0a;padding:28px 40px 30px;min-width:0;">
+      <span style="display:block;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:#d70015;margin-bottom:14px;">Client</span>
+      <span style="font-family:'Space Mono',monospace;font-size:13px;letter-spacing:0.06em;text-transform:uppercase;color:#f4f1ea;">Kai Cenat</span>
+    </div>
+    <div data-m="pad" style="background:#0a0a0a;padding:28px 40px 30px;min-width:0;">
+      <span style="display:block;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:#d70015;margin-bottom:14px;">Year</span>
+      <span style="font-family:'Space Mono',monospace;font-size:13px;letter-spacing:0.06em;text-transform:uppercase;color:#f4f1ea;">'26</span>
+    </div>
+    <div data-m="pad" style="background:#0a0a0a;padding:28px 40px 30px;min-width:0;">
+      <span style="display:block;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:#d70015;margin-bottom:14px;">Role</span>
+      <div style="display:flex;flex-direction:column;gap:8px;font-family:'Space Mono',monospace;font-size:13px;letter-spacing:0.06em;text-transform:uppercase;color:#f4f1ea;">
+        <span>Creative Direction</span>
+        <span>Production Design</span>
+        <span>Strategy</span>
+      </div>
+    </div>
+  </div>
+
+  <div data-m="pad frames" style="display:flex;flex-direction:column;gap:112px;padding:88px 40px 96px;">
+
+      <div data-reveal-block="" style="display:grid;grid-template-columns:56% 1fr;gap:40px;align-items:end;">
+        <div data-reveal="img" style="grid-column:1;position:relative;aspect-ratio:3/4;background:#141414;border:1px solid #1f1f1f;overflow:hidden;">
+          <img src="../stills/streamer-university-01.jpg" alt="" style="width:100%;height:100%;object-fit:cover;display:block;">
+        </div>
+        <div style="grid-column:2;align-self:start;padding-top:64px;display:flex;flex-direction:column;gap:34px;">
+          <p data-reveal="lead" style="margin:0;max-width:20ch;font-family:'Archivo',sans-serif;font-weight:500;font-stretch:100%;font-size:clamp(24px,2.5vw,38px);line-height:1.16;letter-spacing:-0.025em;color:#f4f1ea;text-wrap:pretty;">A world built through playful production design, where every prop, texture, and environment adds another layer to the story.</p>
+          <sc-if value="{{ showCaptions }}" hint-placeholder-val="{{ true }}">
+            <div data-reveal="cap2" style="display:flex;gap:14px;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;">
+              <span style="color:#d70015;">01</span>
+              <span style="color:#8a857b;">—</span>
+            </div>
+          </sc-if>
+        </div>
+      </div>
+
+      <div data-reveal-block="" style="display:grid;grid-template-columns:1fr 1fr;gap:24px;">
+        <div>
+          <div data-reveal="img" style="position:relative;aspect-ratio:3/4;background:#141414;border:1px solid #1f1f1f;overflow:hidden;">
+            <img src="../stills/streamer-university-02.jpg" alt="" style="width:100%;height:100%;object-fit:cover;display:block;">
+          </div>
+        <sc-if value="{{ showCaptions }}" hint-placeholder-val="{{ true }}">
+          <div data-reveal="cap" style="padding-top:14px;display:flex;gap:14px;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;">
+            <span style="color:#d70015;">02</span>
+            <span style="color:#8a857b;">—</span>
+          </div>
+        </sc-if>
+        </div>
+        <div>
+          <div data-reveal="img2" style="position:relative;aspect-ratio:3/4;background:#141414;border:1px solid #1f1f1f;overflow:hidden;">
+            <img src="../stills/streamer-university-03.jpg" alt="" style="width:100%;height:100%;object-fit:cover;display:block;">
+          </div>
+        <sc-if value="{{ showCaptions }}" hint-placeholder-val="{{ true }}">
+          <div data-reveal="cap2" style="padding-top:14px;display:flex;gap:14px;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;">
+            <span style="color:#d70015;">03</span>
+            <span style="color:#8a857b;">—</span>
+          </div>
+        </sc-if>
+        </div>
+      </div>
+
+      <div data-reveal-block="" style="display:grid;grid-template-columns:1fr 40%;gap:40px;align-items:end;">
+        <div style="grid-column:1;align-self:start;padding-top:64px;display:flex;flex-direction:column;gap:34px;">
+          <p data-reveal="lead" style="margin:0;max-width:24ch;font-family:'Archivo',sans-serif;font-weight:500;font-stretch:100%;font-size:clamp(24px,2.5vw,38px);line-height:1.16;letter-spacing:-0.025em;color:#f4f1ea;text-wrap:pretty;">Each space is designed to reward attention, balancing humor, charm, and visual intrigue so that the environment becomes an active participant in the narrative rather than simply its backdrop.</p>
+          <sc-if value="{{ showCaptions }}" hint-placeholder-val="{{ true }}">
+            <div data-reveal="cap2" style="display:flex;gap:14px;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;">
+              <span style="color:#d70015;">04</span>
+              <span style="color:#8a857b;">—</span>
+            </div>
+          </sc-if>
+        </div>
+        <div data-reveal="img" style="grid-column:2;position:relative;aspect-ratio:3/4;background:#141414;border:1px solid #1f1f1f;overflow:hidden;">
+          <img src="../stills/streamer-university-04.jpg" alt="" style="width:100%;height:100%;object-fit:cover;display:block;">
+        </div>
+      </div>
+
+      <div data-reveal-block="" style="display:grid;grid-template-columns:1fr 1fr;gap:24px;">
+        <div>
+          <div data-reveal="img" style="position:relative;aspect-ratio:3/4;background:#141414;border:1px solid #1f1f1f;overflow:hidden;">
+            <img src="../stills/streamer-university-05.jpg" alt="" style="width:100%;height:100%;object-fit:cover;display:block;">
+          </div>
+        <sc-if value="{{ showCaptions }}" hint-placeholder-val="{{ true }}">
+          <div data-reveal="cap" style="padding-top:14px;display:flex;gap:14px;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;">
+            <span style="color:#d70015;">05</span>
+            <span style="color:#8a857b;">—</span>
+          </div>
+        </sc-if>
+        </div>
+        <div>
+          <div data-reveal="img2" style="position:relative;aspect-ratio:3/4;background:#141414;border:1px solid #1f1f1f;overflow:hidden;">
+            <img src="../stills/streamer-university-06.jpg" alt="" style="width:100%;height:100%;object-fit:cover;display:block;">
+          </div>
+        <sc-if value="{{ showCaptions }}" hint-placeholder-val="{{ true }}">
+          <div data-reveal="cap2" style="padding-top:14px;display:flex;gap:14px;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;">
+            <span style="color:#d70015;">06</span>
+            <span style="color:#8a857b;">—</span>
+          </div>
+        </sc-if>
+        </div>
+      </div>
+
+      <div data-reveal-block="" style="display:grid;grid-template-columns:62% 1fr;gap:40px;align-items:end;">
+        <div data-reveal="img" style="grid-column:1;position:relative;aspect-ratio:3/4;background:#141414;border:1px solid #1f1f1f;overflow:hidden;">
+          <img src="../stills/streamer-university-07.jpg" alt="" style="width:100%;height:100%;object-fit:cover;display:block;">
+        </div>
+        <sc-if value="{{ showCaptions }}" hint-placeholder-val="{{ true }}">
+          <div data-reveal="cap" style="grid-column:2;padding-bottom:6px;display:flex;gap:14px;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;">
+            <span style="color:#d70015;">07</span>
+            <span style="color:#8a857b;">—</span>
+          </div>
+        </sc-if>
+      </div>
+
+      <div data-reveal-block="" style="display:grid;grid-template-columns:1fr 50%;gap:40px;align-items:end;">
+        <div style="grid-column:1;align-self:start;padding-top:64px;display:flex;flex-direction:column;gap:34px;">
+          <p data-reveal="lead" style="margin:0;max-width:24ch;font-family:'Archivo',sans-serif;font-weight:500;font-stretch:100%;font-size:clamp(24px,2.5vw,38px);line-height:1.16;letter-spacing:-0.025em;color:#f4f1ea;text-wrap:pretty;">Elevating the visual world through premium materials and thoughtful set dressing, this environment combines velvet  red drapery, custom streamer University flags , an elegant chandelier, and walnut teak flooring to create a setting that feels established, sophisticated, and rich with tradition.</p>
+          <sc-if value="{{ showCaptions }}" hint-placeholder-val="{{ true }}">
+            <div data-reveal="cap2" style="display:flex;gap:14px;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;">
+              <span style="color:#d70015;">08</span>
+              <span style="color:#8a857b;">—</span>
+            </div>
+          </sc-if>
+        </div>
+        <div data-reveal="img" style="grid-column:2;position:relative;aspect-ratio:3/4;background:#141414;border:1px solid #1f1f1f;overflow:hidden;">
+          <img src="../stills/streamer-university-08.jpg" alt="" style="width:100%;height:100%;object-fit:cover;display:block;">
+        </div>
+      </div>
+
+  </div>
+
+  <sc-if value="{{ showStrategy }}" hint-placeholder-val="{{ true }}">
+    <div data-reveal-block="" data-m="pad" style="display:grid;grid-template-columns:1fr 45%;gap:40px;padding:64px 40px 76px;border-top:1px solid #1f1f1f;">
+      <div style="display:flex;flex-direction:column;gap:56px;align-items:start;">
+        <div data-reveal="cap">
+          <span style="display:block;font-family:'Space Mono',monospace;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;color:#d70015;margin-bottom:16px;">Strategy</span>
+          
+        </div>
+
+        <div data-phone="" data-reveal="img" style="display:flex;flex-direction:column;gap:20px;width:100%;max-width:406px;">
+          <div onClick="{{ nextShot }}" style="position:relative;width:100%;aspect-ratio:71.5/146.6;cursor:pointer;flex:none;">
+            <span style="position:absolute;left:-2px;top:20.4%;width:2px;height:3.4%;border-radius:1px 0 0 1px;background:linear-gradient(90deg,#8e8e8b,#d6d6d2);"></span>
+            <span style="position:absolute;left:-2px;top:27.4%;width:2px;height:6.2%;border-radius:1px 0 0 1px;background:linear-gradient(90deg,#8e8e8b,#d6d6d2);"></span>
+            <span style="position:absolute;left:-2px;top:35.6%;width:2px;height:6.2%;border-radius:1px 0 0 1px;background:linear-gradient(90deg,#8e8e8b,#d6d6d2);"></span>
+            <span style="position:absolute;right:-2px;top:29.2%;width:2px;height:9.4%;border-radius:0 1px 1px 0;background:linear-gradient(270deg,#8e8e8b,#d6d6d2);"></span>
+            <div style="position:relative;width:100%;height:100%;border-radius:70px;padding:4px;background:linear-gradient(118deg,#f6f6f4 0%,#b7b7b3 7%,#eeeeeb 15%,#cbcbc6 28%,#f7f7f5 46%,#c4c4bf 64%,#efefec 78%,#b2b2ae 90%,#f2f2f0 100%);box-shadow:0 40px 88px rgba(0,0,0,0.58),0 0 0 0.5px rgba(255,255,255,0.22);">
+              <div style="position:relative;width:100%;height:100%;border-radius:66px;padding:10px;background:#050505;">
+                <div style="position:relative;width:100%;height:100%;border-radius:56px;overflow:hidden;background:#0a0a0a;">
+                  <img data-shot="0" src="../stills/streamer-university-ig-01.png" alt="Streamer University Instagram post — 2026 merch" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;">
+                  <img data-shot="1" src="../stills/streamer-university-ig-02.png" alt="Streamer University Instagram post — 2026 merch" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;">
+                  <img data-shot="2" src="../stills/streamer-university-ig-03.png" alt="Streamer University Instagram post — SU 2026 uniform" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;">
+                  <div style="position:absolute;top:1.6%;left:50%;transform:translateX(-50%);width:29%;height:4.9%;border-radius:22px;background:#000;"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;">
+            <span style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:#8a857b;">Instagram · @streameruniversity</span>
+            <div style="display:flex;align-items:center;gap:14px;">
+              <div style="display:flex;gap:6px;">
+                <span data-dot="0" style="width:5px;height:5px;border-radius:50%;display:block;"></span>
+                <span data-dot="1" style="width:5px;height:5px;border-radius:50%;display:block;"></span>
+                <span data-dot="2" style="width:5px;height:5px;border-radius:50%;display:block;"></span>
+              </div>
+              <div style="display:flex;gap:6px;">
+                <button data-arrow="" onClick="{{ prevShot }}" aria-label="Previous post" style="width:26px;height:26px;display:flex;align-items:center;justify-content:center;background:transparent;border:1px solid #1f1f1f;color:#8a857b;font-family:'Space Mono',monospace;font-size:11px;cursor:pointer;padding:0;">←</button>
+                <button data-arrow="" onClick="{{ nextShot }}" aria-label="Next post" style="width:26px;height:26px;display:flex;align-items:center;justify-content:center;background:transparent;border:1px solid #1f1f1f;color:#8a857b;font-family:'Space Mono',monospace;font-size:11px;cursor:pointer;padding:0;">→</button>
+              </div>
+            </div>
+          </div>
+
+          <div data-reveal="cap2" style="margin-top:14px;padding-top:26px;border-top:1px solid #1f1f1f;">
+            <span style="display:block;font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:#d70015;margin-bottom:24px;">Engagement · 3 posts</span>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:26px 20px;">
+              <div>
+                <span style="display:block;font-family:'Archivo',sans-serif;font-weight:900;font-stretch:112%;font-size:26px;line-height:1;letter-spacing:-0.03em;color:#f4f1ea;">183.6K</span>
+                <span style="display:block;margin-top:8px;font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:#8a857b;">Likes</span>
+              </div>
+              <div>
+                <span style="display:block;font-family:'Archivo',sans-serif;font-weight:900;font-stretch:112%;font-size:26px;line-height:1;letter-spacing:-0.03em;color:#f4f1ea;">6,256</span>
+                <span style="display:block;margin-top:8px;font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:#8a857b;">Reposts</span>
+              </div>
+              <div>
+                <span style="display:block;font-family:'Archivo',sans-serif;font-weight:900;font-stretch:112%;font-size:26px;line-height:1;letter-spacing:-0.03em;color:#f4f1ea;">4,568</span>
+                <span style="display:block;margin-top:8px;font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:#8a857b;">Shares</span>
+              </div>
+              <div>
+                <span style="display:block;font-family:'Archivo',sans-serif;font-weight:900;font-stretch:112%;font-size:26px;line-height:1;letter-spacing:-0.03em;color:#f4f1ea;">1,051</span>
+                <span style="display:block;margin-top:8px;font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:#8a857b;">Comments</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div data-reveal="img" style="border:1px solid #1f1f1f;background:#141414;">
+        <div style="display:flex;align-items:center;gap:10px;padding:9px 12px;border-bottom:1px solid #1f1f1f;">
+          <span style="width:7px;height:7px;background:#3a3a3a;"></span>
+          <span style="flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-family:'Space Mono',monospace;font-size:9px;letter-spacing:0.1em;color:#8a857b;">shop.streameruniversity.com/collections/lookbook</span>
+        </div>
+        <div style="background:#f5f1e8;">
+          <img src="../stills/streamer-university-lookbook.jpg" alt="Streamer University lookbook page" style="width:100%;height:auto;display:block;">
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ showCredits }}" hint-placeholder-val="{{ true }}">
+    <div data-m="pad stack" style="display:grid;grid-template-columns:0.28fr 1fr;gap:40px;padding:44px 40px 64px;border-top:1px solid #1f1f1f;">
+      <span style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;color:#d70015;">Credits</span>
+      <div style="display:grid;grid-template-columns:auto 1fr;gap:14px 24px;align-content:start;max-width:640px;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;">
+        <span style="color:#8a857b;">Production Company</span><span style="color:#f4f1ea;">Good day Projects</span>
+        
+        <span style="color:#8a857b;">Photographer</span><span style="color:#f4f1ea;">Zamar Velez</span>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ showNeighbours }}" hint-placeholder-val="{{ false }}">
+  <div data-m="pn" style="display:grid;grid-template-columns:1fr 1fr;gap:1px;background:#1f1f1f;border-top:1px solid #1f1f1f;border-bottom:1px solid #1f1f1f;">
+    <a href="Project - Booklet 014.dc.html" data-m="pad" style="background:#0a0a0a;padding:30px 40px;display:block;">
+      <span style="display:block;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:#d70015;margin-bottom:8px;">← Prev</span>
+      <span style="font-family:'Archivo',sans-serif;font-weight:900;font-stretch:112%;text-transform:uppercase;font-size:22px;letter-spacing:-0.02em;color:#f4f1ea;">Booklet / 014</span>
+    </a>
+    <a href="Project - Studio Build.dc.html" data-m="pad" style="background:#0a0a0a;padding:30px 40px;display:block;text-align:right;">
+      <span style="display:block;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:#d70015;margin-bottom:8px;">Next →</span>
+      <span style="font-family:'Archivo',sans-serif;font-weight:900;font-stretch:112%;text-transform:uppercase;font-size:22px;letter-spacing:-0.02em;color:#f4f1ea;">Studio Build</span>
+    </a>
+  </div>
+  </sc-if>
+
+  <div data-m="pad" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px;padding:34px 40px;">
+    <a href="mailto:andrewjcaso@gmail.com" style="font-family:'Archivo',sans-serif;font-weight:900;font-stretch:112%;text-transform:uppercase;font-size:clamp(20px,3vw,26px);letter-spacing:-0.02em;">andrewjcaso@gmail.com</a>
+    <div style="display:flex;gap:22px;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:#f4f1ea;">
+      <a href="https://www.instagram.com/andrewcaso/">Instagram</a>
+      <a href="https://www.linkedin.com/in/andrew-caso-229284204">LinkedIn</a>
+    </div>
+    <span style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.14em;color:#d70015;">© '26 K.SO<span style="color:#d70015;">*</span> — LOS ANGELES</span>
+  </div>
+
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;showMotion&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Motion&quot;},&quot;showCaptions&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Sections&quot;},&quot;showStrategy&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Sections&quot;},&quot;showCredits&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Sections&quot;},&quot;showNeighbours&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Sections&quot;}}">
+class Component extends DCLogic {
+  state = { clock: '' };
+  componentDidMount() {
+    const p = (n) => String(n).padStart(2, '0');
+    const tick = () => { const d = new Date(); this.setState({ clock: p(d.getHours())+':'+p(d.getMinutes())+':'+p(d.getSeconds()) }); };
+    tick();
+    this._t = setInterval(tick, 1000);
+    this._motion();
+  }
+  // Reveal state lives on data attributes the template never declares, so the
+  // per-second clock re-render cannot reset it.
+  _motion() {
+    if ((this.props.showMotion ?? true) === false) return;
+    const root = document.querySelector('[data-motion-root]');
+    if (!root) return;
+    root.setAttribute('data-motion', '1');
+    if (!('IntersectionObserver' in window)) {
+      root.querySelectorAll('[data-reveal-block]').forEach(b => b.setAttribute('data-shown', ''));
+      return;
+    }
+    // Re-arms: shown once 12% is in view, reset once the block is fully out,
+    // so every pass down (or back up) the page plays the reveal again.
+    this._io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.intersectionRatio >= 0.12) e.target.setAttribute('data-shown', '');
+        else if (e.intersectionRatio === 0) e.target.removeAttribute('data-shown');
+      });
+    }, { threshold: [0, 0.12], rootMargin: '0px 0px -8% 0px' });
+    root.querySelectorAll('[data-reveal-block]').forEach(b => this._io.observe(b));
+  }
+  componentWillUnmount() {
+    clearInterval(this._t);
+    if (this._io) this._io.disconnect();
+  }
+  // Carousel index is held on the DOM (data-i) rather than in state, so the
+  // per-second clock re-render never fights it and the phone never re-mounts.
+  _step(d) {
+    const el = document.querySelector('[data-phone]');
+    if (!el) return;
+    const n = 3;
+    const i = (parseInt(el.getAttribute('data-i') || '0', 10) + d + n) % n;
+    el.setAttribute('data-i', String(i));
+  }
+  renderVals() {
+    return {
+      clock: this.state.clock,
+      nextShot: () => this._step(1),
+      prevShot: (e) => { if (e) e.stopPropagation(); this._step(-1); },
+      showCaptions: this.props.showCaptions ?? true,
+      showStrategy: this.props.showStrategy ?? true,
+      showCredits: this.props.showCredits ?? true,
+      showNeighbours: this.props.showNeighbours ?? false,
+    };
+  }
+}
+
+</script>
+</body>
+</html>

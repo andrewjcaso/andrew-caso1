@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="../support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300&display=swap" rel="stylesheet">
+<script src="../image-slot.js"></script>
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: #0a0a0a; }
+  a { color: #f4f1ea; text-decoration: none; }
+  a:hover { color: #d70015; }
+
+  /* phone layout (<=720px) — desktop untouched */
+  @media (max-width: 720px) {
+    [data-m~="pad"] { padding-left: 20px !important; padding-right: 20px !important; }
+    [data-m~="cl"] { left: 20px !important; }
+    [data-m~="cr"] { right: 20px !important; }
+    [data-m~="nav"] { flex-wrap: wrap !important; gap: 14px 20px !important; padding-top: 16px !important; padding-bottom: 16px !important; }
+    [data-m~="navlinks"] { flex-wrap: wrap !important; gap: 10px 16px !important; width: 100% !important; font-size: 10px !important; }
+    [data-m~="sb"] { flex-wrap: wrap !important; gap: 6px 16px !important; }
+    [data-m~="sb"] > * { white-space: normal !important; }
+    [data-m~="stack"] { grid-template-columns: minmax(0,1fr) !important; }
+    [data-m~="stack"] > div:empty { display: none !important; }
+    [data-m~="nbr"] { border-right: 0 !important; border-bottom: 1px solid #1f1f1f !important; }
+    [data-m~="ph"] { min-height: 0 !important; height: auto !important; }
+    [data-m~="g1"] { grid-template-columns: minmax(0,1fr) !important; }
+    [data-m~="g2"] { grid-template-columns: repeat(2, minmax(0,1fr)) !important; gap: 10px !important; }
+    [data-m~="clients"] { grid-template-columns: repeat(2, minmax(0,1fr)) !important; }
+    [data-m~="pn"] > a > span:last-child { font-size: 16px !important; }
+    [data-m~="frames"] { gap: 56px !important; padding-top: 48px !important; padding-bottom: 56px !important; }
+    [data-reveal-block] { grid-template-columns: minmax(0,1fr) !important; width: 100% !important; gap: 12px !important; justify-content: stretch !important; }
+    [data-reveal-block] > * { grid-column: auto !important; }
+    [data-reveal-block] > [data-reveal="cap"]:first-child, [data-reveal-block] > :first-child:has([data-reveal="cap"]) { order: 2; padding-bottom: 0 !important; }
+    [data-m~="hide"], pre[aria-hidden] { display: none !important; }
+    [data-m~="work"] { padding-bottom: 120px !important; }
+    h1 { overflow-wrap: anywhere; }
+  }
+</style>
+</helmet>
+
+<div style="background:#0a0a0a;color:#f4f1ea;font-family:'Archivo',sans-serif;min-height:100vh;">
+
+  <div data-m="nav pad" style="display:flex;justify-content:space-between;align-items:center;padding:22px 40px;border-bottom:1px solid #1f1f1f;">
+    <a href="../Andrew Caso Landing - Combined.dc.html" style="display:flex;align-items:center;gap:12px;">
+      <img src="../assets/logo-mark.png" alt="" style="width:34px;height:34px;object-fit:contain;" />
+      <span style="font-family:'Archivo',sans-serif;font-weight:900;font-stretch:112%;font-size:20px;letter-spacing:-0.02em;text-transform:uppercase;">K.SO<span style="color:#d70015;">*</span></span>
+    </a>
+    <div data-m="navlinks" style="display:flex;gap:26px;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:#f4f1ea;">
+      <a href="../Andrew Caso Landing - Combined.dc.html">Home</a>
+      <a href="../Commercial/Commercial.dc.html">Commercial</a>
+      <a href="../Photoshoot/Photoshoot.dc.html">Photoshoot</a>
+      <a href="../Music Videos/Music Videos.dc.html">Music Videos</a>
+      <a href="Creative Direction.dc.html" style="color:#d70015;">Creative Direction</a>
+      <a href="../Contact.dc.html">Contact</a>
+    </div>
+  </div>
+
+  <div data-m="pad" style="position:relative;padding:34px 40px 30px;border-bottom:1px solid #1f1f1f;">
+    <div style="display:flex;justify-content:space-between;align-items:center;">
+      <a href="Creative Direction.dc.html" style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:#f4f1ea;">← Creative Direction</a>
+      <span style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.18em;color:#d70015;">{{ clock }}</span>
+    </div>
+  </div>
+
+  <div data-m="pad" style="padding:56px 40px 36px;">
+    <h1 style="font-family:'Archivo',sans-serif;font-weight:900;font-stretch:112%;text-transform:uppercase;font-size:clamp(44px,8vw,104px);line-height:0.86;letter-spacing:-0.04em;margin:0;">First Mark<span style="color:#d70015;">.</span></h1>
+  </div>
+
+  <div data-m="pad" style="padding:0 40px 8px;">
+    <div style="position:relative;aspect-ratio:16/9;background:#141414;border:1px solid #1f1f1f;overflow:hidden;">
+      <image-slot id="pr-12" shape="rect" placeholder="First Mark — drop poster / key still" style="width:100%;height:100%;display:block;"></image-slot>
+    </div>
+  </div>
+
+  <div data-m="stack" style="display:grid;grid-template-columns:0.42fr 0.58fr;gap:1px;background:#1f1f1f;border-top:1px solid #1f1f1f;border-bottom:1px solid #1f1f1f;margin-top:40px;">
+    <div data-m="pad" style="background:#0a0a0a;padding:40px;min-width:0;">
+      <div style="display:grid;grid-template-columns:auto 1fr;gap:14px 20px;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;">
+        <span style="color:#d70015;">Year</span><span style="color:#f4f1ea;">'21</span>
+        <span style="color:#d70015;">Role</span><span style="color:#f4f1ea;">Creative Direction</span>
+        <span style="color:#d70015;">Client</span><span style="color:#f4f1ea;">K.SO Studio</span>
+        <span style="color:#d70015;">Production Company</span><span style="color:#f4f1ea;">—</span>
+        <span style="color:#d70015;">Director</span><span style="color:#f4f1ea;">—</span>
+      </div>
+    </div>
+    <div style="background:#0a0a0a;"></div>
+  </div>
+
+  <sc-if value="{{ showGallery }}" hint-placeholder-val="{{ false }}">
+    <div data-m="pad" style="padding:48px 40px 64px;">
+      <div data-m="sb" style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:20px;">
+        <span style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;color:#f4f1ea;">Stills / Gallery</span>
+        <span style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#d70015;">Drop photos — add or remove as needed</span>
+      </div>
+      <div data-m="g2" style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;">
+          <div style="position:relative;aspect-ratio:3/2;background:#141414;border:1px solid #1f1f1f;">
+            <image-slot id="pr-12-g1" shape="rect" placeholder="Still 01" style="width:100%;height:100%;display:block;"></image-slot>
+          </div>
+          <div style="position:relative;aspect-ratio:3/2;background:#141414;border:1px solid #1f1f1f;">
+            <image-slot id="pr-12-g2" shape="rect" placeholder="Still 02" style="width:100%;height:100%;display:block;"></image-slot>
+          </div>
+          <div style="position:relative;aspect-ratio:3/2;background:#141414;border:1px solid #1f1f1f;">
+            <image-slot id="pr-12-g3" shape="rect" placeholder="Still 03" style="width:100%;height:100%;display:block;"></image-slot>
+          </div>
+          <div style="position:relative;aspect-ratio:3/2;background:#141414;border:1px solid #1f1f1f;">
+            <image-slot id="pr-12-g4" shape="rect" placeholder="Still 04" style="width:100%;height:100%;display:block;"></image-slot>
+          </div>
+          <div style="position:relative;aspect-ratio:3/2;background:#141414;border:1px solid #1f1f1f;">
+            <image-slot id="pr-12-g5" shape="rect" placeholder="Still 05" style="width:100%;height:100%;display:block;"></image-slot>
+          </div>
+          <div style="position:relative;aspect-ratio:3/2;background:#141414;border:1px solid #1f1f1f;">
+            <image-slot id="pr-12-g6" shape="rect" placeholder="Still 06" style="width:100%;height:100%;display:block;"></image-slot>
+          </div>
+      </div>
+    </div>
+  </sc-if>
+
+  <div data-m="pn" style="display:grid;grid-template-columns:1fr 1fr;gap:1px;background:#1f1f1f;border-top:1px solid #1f1f1f;border-bottom:1px solid #1f1f1f;">
+    <a href="Project - Studio Build.dc.html" data-m="pad" style="background:#0a0a0a;padding:30px 40px;display:block;">
+      <span style="display:block;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:#d70015;margin-bottom:8px;">← Prev</span>
+      <span style="font-family:'Archivo',sans-serif;font-weight:900;font-stretch:112%;text-transform:uppercase;font-size:22px;letter-spacing:-0.02em;color:#f4f1ea;">Studio Build</span>
+    </a>
+    <a href="Project - Booklet 014.dc.html" data-m="pad" style="background:#0a0a0a;padding:30px 40px;display:block;text-align:right;">
+      <span style="display:block;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:#d70015;margin-bottom:8px;">Next →</span>
+      <span style="font-family:'Archivo',sans-serif;font-weight:900;font-stretch:112%;text-transform:uppercase;font-size:22px;letter-spacing:-0.02em;color:#f4f1ea;">Booklet / 014</span>
+    </a>
+  </div>
+
+  <div data-m="pad" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px;padding:34px 40px;">
+    <a href="mailto:andrewjcaso@gmail.com" style="font-family:'Archivo',sans-serif;font-weight:900;font-stretch:112%;text-transform:uppercase;font-size:clamp(20px,3vw,26px);letter-spacing:-0.02em;">andrewjcaso@gmail.com</a>
+    <div style="display:flex;gap:22px;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:#f4f1ea;">
+      <a href="https://www.instagram.com/andrewcaso/">Instagram</a>
+      <a href="https://www.linkedin.com/in/andrew-caso-229284204">LinkedIn</a>
+    </div>
+    <span style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.14em;color:#d70015;">© '26 K.SO<span style="color:#d70015;">*</span> — LOS ANGELES</span>
+  </div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;showGallery&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Sections&quot;}}">
+class Component extends DCLogic {
+  state = { clock: '' };
+  componentDidMount() {
+    const p = (n) => String(n).padStart(2, '0');
+    const tick = () => { const d = new Date(); this.setState({ clock: p(d.getHours())+':'+p(d.getMinutes())+':'+p(d.getSeconds()) }); };
+    tick();
+    this._t = setInterval(tick, 1000);
+  }
+  componentWillUnmount() { clearInterval(this._t); }
+  renderVals() { return { clock: this.state.clock, showGallery: this.props.showGallery ?? false }; }
+}
+</script>
+</body>
+</html>

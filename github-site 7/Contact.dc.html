@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300&display=swap" rel="stylesheet">
+<script src="image-slot.js"></script>
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: #0a0a0a; }
+  a { color: #f4f1ea; text-decoration: none; }
+  a:hover { color: #d70015; }
+  input, textarea, select { font-family: 'Archivo', sans-serif; }
+  input::placeholder, textarea::placeholder { color: #6b675f; }
+  input:focus, textarea:focus, select:focus { outline: none; border-color: #d70015 !important; }
+
+  /* phone layout (<=720px) — desktop untouched */
+  @media (max-width: 720px) {
+    [data-m~="pad"] { padding-left: 20px !important; padding-right: 20px !important; }
+    [data-m~="cl"] { left: 20px !important; }
+    [data-m~="cr"] { right: 20px !important; }
+    [data-m~="nav"] { flex-wrap: wrap !important; gap: 14px 20px !important; padding-top: 16px !important; padding-bottom: 16px !important; }
+    [data-m~="navlinks"] { flex-wrap: wrap !important; gap: 10px 16px !important; width: 100% !important; font-size: 10px !important; }
+    [data-m~="sb"] { flex-wrap: wrap !important; gap: 6px 16px !important; }
+    [data-m~="sb"] > * { white-space: normal !important; }
+    [data-m~="stack"] { grid-template-columns: minmax(0,1fr) !important; }
+    [data-m~="stack"] > div:empty { display: none !important; }
+    [data-m~="nbr"] { border-right: 0 !important; border-bottom: 1px solid #1f1f1f !important; }
+    [data-m~="ph"] { min-height: 0 !important; height: auto !important; }
+    [data-m~="g1"] { grid-template-columns: minmax(0,1fr) !important; }
+    [data-m~="g2"] { grid-template-columns: repeat(2, minmax(0,1fr)) !important; gap: 10px !important; }
+    [data-m~="clients"] { grid-template-columns: repeat(2, minmax(0,1fr)) !important; }
+    [data-m~="pn"] > a > span:last-child { font-size: 16px !important; }
+    [data-m~="frames"] { gap: 56px !important; padding-top: 48px !important; padding-bottom: 56px !important; }
+    [data-reveal-block] { grid-template-columns: minmax(0,1fr) !important; width: 100% !important; gap: 12px !important; justify-content: stretch !important; }
+    [data-reveal-block] > * { grid-column: auto !important; }
+    [data-reveal-block] > [data-reveal="cap"]:first-child, [data-reveal-block] > :first-child:has([data-reveal="cap"]) { order: 2; padding-bottom: 0 !important; }
+    [data-m~="hide"], pre[aria-hidden] { display: none !important; }
+    [data-m~="work"] { padding-bottom: 120px !important; }
+    h1 { overflow-wrap: anywhere; }
+  }
+</style>
+</helmet>
+
+<div style="background:#0a0a0a;color:#f4f1ea;font-family:'Archivo',sans-serif;min-height:100vh;display:flex;flex-direction:column;">
+
+  <!-- nav -->
+  <div data-m="nav pad" style="display:flex;justify-content:space-between;align-items:center;padding:22px 40px;border-bottom:1px solid #1f1f1f;">
+    <a href="Andrew Caso Landing - Combined.dc.html" style="display:flex;align-items:center;gap:12px;">
+      <img src="assets/logo-mark.png" alt="" style="width:34px;height:34px;object-fit:contain;" />
+      <span style="font-family:'Archivo',sans-serif;font-weight:900;font-stretch:112%;font-size:20px;letter-spacing:-0.02em;text-transform:uppercase;">K.SO<span style="color:#d70015;">*</span></span>
+    </a>
+    <div data-m="navlinks" style="display:flex;gap:26px;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:#f4f1ea;">
+      <a href="Andrew Caso Landing - Combined.dc.html">Home</a>
+      <a href="Commercial/Commercial.dc.html">Commercial</a>
+      <a href="Photoshoot/Photoshoot.dc.html">Photoshoot</a>
+      <a href="Music Videos/Music Videos.dc.html">Music Videos</a>
+      <a href="Creative Direction/Creative Direction.dc.html">Creative Direction</a>
+      <a href="Contact.dc.html" style="color:#d70015;">Contact</a>
+    </div>
+  </div>
+
+  <!-- header -->
+  <div data-m="pad" style="position:relative;padding:72px 40px 40px;border-bottom:1px solid #1f1f1f;">
+    <span data-m="cl" style="position:absolute;top:30px;left:40px;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.18em;color:#d70015;">K.SO / GET IN TOUCH</span>
+    <span data-m="cr" style="position:absolute;top:30px;right:40px;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.18em;color:#d70015;">{{ clock }}</span>
+    <h1 style="font-family:'Archivo',sans-serif;font-weight:900;font-stretch:112%;text-transform:uppercase;font-size:clamp(46px,8.4vw,110px);line-height:0.84;letter-spacing:-0.04em;margin:0;">Contact<span style="color:#d70015;">.</span></h1>
+  </div>
+
+  <!-- body: two columns -->
+  <div data-m="stack" style="display:grid;grid-template-columns:0.92fr 1.08fr;flex:1;">
+
+    <!-- left: direct + details -->
+    <div data-m="pad nbr" style="padding:56px 40px;border-right:1px solid #1f1f1f;display:flex;flex-direction:column;gap:40px;">
+      <div>
+        <span style="display:block;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:#d70015;margin-bottom:16px;">Email direct</span>
+        <a href="mailto:andrewjcaso@gmail.com" style="font-family:'Archivo',sans-serif;font-weight:900;font-stretch:112%;text-transform:uppercase;font-size:clamp(22px,3.2vw,34px);letter-spacing:-0.02em;line-height:1;word-break:break-word;">andrewjcaso@gmail.com</a>
+      </div>
+
+      <div style="display:grid;grid-template-columns:auto 1fr;gap:16px 24px;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;padding-top:36px;border-top:1px solid #1f1f1f;">
+        <span style="color:#d70015;">Based</span><span style="color:#f4f1ea;">Los Angeles, CA</span>
+        <span style="color:#d70015;">Work</span><span style="color:#f4f1ea;">Commercial · Photoshoot · Music Videos · Film</span>
+        <span style="color:#d70015;">Roles</span><span style="color:#f4f1ea;">Production Design / Creative Direction</span>
+        <span style="color:#d70015;">Status</span><span style="color:#f4f1ea;">Booking select projects — '26</span>
+      </div>
+
+      <div style="padding-top:36px;border-top:1px solid #1f1f1f;">
+        <span style="display:block;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:#d70015;margin-bottom:16px;">Follow</span>
+        <div style="display:flex;flex-direction:column;gap:12px;font-family:'Space Mono',monospace;font-size:13px;letter-spacing:0.12em;text-transform:uppercase;">
+          <a href="https://www.instagram.com/andrewcaso/" style="border-bottom:1px solid #2a2a2a;padding-bottom:8px;">Instagram — @andrewcaso</a>
+          <a href="https://www.linkedin.com/in/andrew-caso-229284204" style="border-bottom:1px solid #2a2a2a;padding-bottom:8px;">LinkedIn — Andrew Caso</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- right: enquiry form -->
+    <div data-m="pad" style="padding:56px 40px;background:#0c0c0c;">
+      <span style="display:block;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:#d70015;margin-bottom:8px;">Project enquiry</span>
+      <p style="font-family:'Archivo',sans-serif;font-weight:400;font-size:24px;line-height:1.32;letter-spacing:-0.01em;color:#f4f1ea;margin:0 0 32px;max-width:480px;text-wrap:pretty;">Tell me about the shoot, dates, scope, and the world you want to build.</p>
+
+      <sc-if value="{{ sent }}" hint-placeholder-val="{{ false }}">
+        <div data-m="pad" style="border:1px solid #d70015;padding:40px;display:flex;flex-direction:column;gap:14px;">
+          <span style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:#d70015;">✱ Message ready</span>
+          <p style="font-size:16px;line-height:1.6;color:#f4f1ea;margin:0;">{{ sentMsg }}</p>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ notSent }}" hint-placeholder-val="{{ true }}">
+        <div style="display:flex;flex-direction:column;gap:20px;max-width:520px;">
+          <div data-m="stack" style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+            <div style="display:flex;flex-direction:column;gap:8px;">
+              <label style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:#d70015;">Name</label>
+              <input value="{{ name }}" onInput="{{ onName }}" placeholder="Your name" style="background:#0a0a0a;border:1px solid #2a2a2a;color:#f4f1ea;padding:13px 14px;font-size:15px;border-radius:0;" />
+            </div>
+            <div style="display:flex;flex-direction:column;gap:8px;">
+              <label style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:#d70015;">Email</label>
+              <input value="{{ email }}" onInput="{{ onEmail }}" placeholder="you@studio.com" style="background:#0a0a0a;border:1px solid #2a2a2a;color:#f4f1ea;padding:13px 14px;font-size:15px;border-radius:0;" />
+            </div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:8px;">
+            <label style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:#d70015;">Project type</label>
+            <select value="{{ ptype }}" onChange="{{ onType }}" style="background:#0a0a0a;border:1px solid #2a2a2a;color:#f4f1ea;padding:13px 14px;font-size:15px;border-radius:0;">
+              <option>Commercial</option>
+              <option>Photoshoot</option>
+              <option>Music Video</option>
+              <option>Film</option>
+              <option>Creative Direction</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:8px;">
+            <label style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:#d70015;">Message</label>
+            <textarea value="{{ msg }}" onInput="{{ onMsg }}" rows="5" placeholder="Dates, scope, references…" style="background:#0a0a0a;border:1px solid #2a2a2a;color:#f4f1ea;padding:13px 14px;font-size:15px;border-radius:0;resize:vertical;"></textarea>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:8px;">
+            <label style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:#d70015;">Attachment</label>
+            <label style="display:flex;align-items:center;gap:14px;background:#0a0a0a;border:1px solid #2a2a2a;padding:11px 14px;cursor:pointer;" style-hover="border-color:#d70015;">
+              <span style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#f4f1ea;border:1px solid #2a2a2a;padding:7px 13px;">Choose file</span>
+              <span style="font-size:14px;color:#6b675f;">{{ fileName }}</span>
+              <input type="file" onChange="{{ onFile }}" style="display:none;" />
+            </label>
+          </div>
+          <button onClick="{{ onSend }}" disabled="{{ sending }}" style="align-self:flex-start;font-family:'Space Mono',monospace;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;color:#f4f1ea;background:#0a0a0a;border:1px solid #2a2a2a;padding:15px 30px;cursor:pointer;transition:all 120ms cubic-bezier(0.2,0.7,0.2,1);" style-hover="background:#d70015;border-color:#d70015;">{{ btnLabel }}</button>
+          <sc-if value="{{ error }}" hint-placeholder-val="{{ false }}">
+            <span style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:#d70015;">{{ error }}</span>
+          </sc-if>
+        </div>
+      </sc-if>
+    </div>
+  </div>
+
+  <!-- footer -->
+  <div data-m="pad" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px;padding:26px 40px;border-top:1px solid #1f1f1f;font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:#d70015;">
+    <span>© '26 K.SO<span style="color:#d70015;">*</span> — LOS ANGELES</span>
+    <span>Production Design / Creative Direction</span>
+  </div>
+
+</div>
+</x-dc>
+<!-- Netlify Forms detection stub: Netlify scans static HTML at deploy time, so the
+     real (JS-rendered) form above submits to this declared form via fetch. -->
+<form name="enquiry" data-netlify="true" netlify-honeypot="bot-field" enctype="multipart/form-data" hidden="hidden" style="display:none;">
+  <input type="text" name="name" />
+  <input type="email" name="email" />
+  <input type="text" name="project-type" />
+  <textarea name="message"></textarea>
+  <input type="file" name="attachment" />
+  <input type="text" name="bot-field" />
+</form>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { clock: '', name: '', email: '', ptype: 'Commercial', msg: '', fileName: 'No file selected', file: null, sent: false, sending: false, error: '' };
+
+  componentDidMount() {
+    const p = (n) => String(n).padStart(2, '0');
+    const tick = () => { const d = new Date(); this.setState({ clock: p(d.getHours())+':'+p(d.getMinutes())+':'+p(d.getSeconds()) }); };
+    tick();
+    this._t = setInterval(tick, 1000);
+  }
+  componentWillUnmount() { clearInterval(this._t); }
+
+  renderVals() {
+    return {
+      clock: this.state.clock,
+      name: this.state.name, email: this.state.email, ptype: this.state.ptype, msg: this.state.msg,
+      sent: this.state.sent,
+      notSent: !this.state.sent,
+      onName: (e) => this.setState({ name: e.target.value }),
+      onEmail: (e) => this.setState({ email: e.target.value }),
+      onType: (e) => this.setState({ ptype: e.target.value }),
+      onMsg: (e) => this.setState({ msg: e.target.value }),
+      fileName: this.state.fileName,
+      sending: this.state.sending,
+      error: this.state.error,
+      btnLabel: this.state.sending ? 'Sending…' : 'Send enquiry →',
+      sentMsg: this.state.sentMsg || "Thanks — your enquiry is on its way to andrewjcaso@gmail.com. I'll reply shortly.",
+      onFile: (e) => {
+        const f = e.target.files && e.target.files[0];
+        this.setState({ file: f || null, fileName: f ? f.name : 'No file selected' });
+      },
+      onSend: async () => {
+        const { name, email, ptype, msg, file, sending } = this.state;
+        if (sending) return;
+        if (!name.trim() || !email.trim() || !msg.trim()) {
+          this.setState({ error: 'Name, email and message are required.' });
+          return;
+        }
+        // No Netlify backend when opened from disk / the design preview
+        if (location.protocol === 'file:') {
+          this.setState({ sent: true, sentMsg: 'Preview only — no server here. Once deployed to Netlify this routes to andrewjcaso@gmail.com.' });
+          return;
+        }
+        this.setState({ sending: true, error: '' });
+        const fd = new FormData();
+        fd.append('form-name', 'enquiry');
+        fd.append('name', name);
+        fd.append('email', email);
+        fd.append('project-type', ptype);
+        fd.append('message', msg);
+        if (file) fd.append('attachment', file);
+        try {
+          const r = await fetch('/', { method: 'POST', body: fd });
+          if (!r.ok) throw new Error(r.status);
+          this.setState({ sending: false, sent: true, sentMsg: '' });
+        } catch (err) {
+          this.setState({ sending: false, error: 'Send failed — email andrewjcaso@gmail.com directly.' });
+        }
+      },
+    };
+  }
+}
+</script>
+</body>
+</html>

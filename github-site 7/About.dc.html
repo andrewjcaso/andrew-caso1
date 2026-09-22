@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&amp;family=Space+Mono:ital,wght@0,400;0,700;1,400&amp;family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300&amp;display=swap" rel="stylesheet">
+<script src="image-slot.js"></script>
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: #0a0a0a; }
+  a { color: #f4f1ea; text-decoration: none; }
+  a:hover { color: #d70015; }
+
+  /* phone layout (<=720px) — desktop untouched */
+  @media (max-width: 720px) {
+    [data-m~="pad"] { padding-left: 20px !important; padding-right: 20px !important; }
+    [data-m~="cl"] { left: 20px !important; }
+    [data-m~="cr"] { right: 20px !important; }
+    [data-m~="nav"] { flex-wrap: wrap !important; gap: 14px 20px !important; padding-top: 16px !important; padding-bottom: 16px !important; }
+    [data-m~="navlinks"] { flex-wrap: wrap !important; gap: 10px 16px !important; width: 100% !important; font-size: 10px !important; }
+    [data-m~="sb"] { flex-wrap: wrap !important; gap: 6px 16px !important; }
+    [data-m~="sb"] > * { white-space: normal !important; }
+    [data-m~="stack"] { grid-template-columns: minmax(0,1fr) !important; }
+    [data-m~="stack"] > div:empty { display: none !important; }
+    [data-m~="nbr"] { border-right: 0 !important; border-bottom: 1px solid #1f1f1f !important; }
+    [data-m~="ph"] { min-height: 0 !important; height: auto !important; }
+    [data-m~="g1"] { grid-template-columns: minmax(0,1fr) !important; }
+    [data-m~="g2"] { grid-template-columns: repeat(2, minmax(0,1fr)) !important; gap: 10px !important; }
+    [data-m~="clients"] { grid-template-columns: repeat(2, minmax(0,1fr)) !important; }
+    [data-m~="pn"] > a > span:last-child { font-size: 16px !important; }
+    [data-m~="frames"] { gap: 56px !important; padding-top: 48px !important; padding-bottom: 56px !important; }
+    [data-reveal-block] { grid-template-columns: minmax(0,1fr) !important; width: 100% !important; gap: 12px !important; justify-content: stretch !important; }
+    [data-reveal-block] > * { grid-column: auto !important; }
+    [data-reveal-block] > [data-reveal="cap"]:first-child, [data-reveal-block] > :first-child:has([data-reveal="cap"]) { order: 2; padding-bottom: 0 !important; }
+    [data-m~="hide"], pre[aria-hidden] { display: none !important; }
+    [data-m~="work"] { padding-bottom: 120px !important; }
+    h1 { overflow-wrap: anywhere; }
+  }
+</style>
+</helmet>
+
+<div style="background:#0a0a0a;color:#f4f1ea;font-family:'Archivo',sans-serif;min-height:100vh;display:flex;flex-direction:column;">
+
+  <div data-m="nav pad" style="display:flex;justify-content:space-between;align-items:center;padding:22px 40px;border-bottom:1px solid #1f1f1f;">
+    <a href="Andrew Caso Landing - Combined.dc.html" style="display:flex;align-items:center;gap:12px;">
+      <img src="assets/logo-mark.png" alt="" style="width:34px;height:34px;object-fit:contain;">
+      <span style="font-family:'Archivo',sans-serif;font-weight:900;font-stretch:112%;font-size:20px;letter-spacing:-0.02em;text-transform:uppercase;">K.SO<span style="color:#d70015;">*</span></span>
+    </a>
+    <div data-m="navlinks" style="display:flex;gap:26px;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:#f4f1ea;">
+      <a href="Andrew Caso Landing - Combined.dc.html">Home</a>
+      <a href="Commercial/Commercial.dc.html">Commercial</a>
+      <a href="Photoshoot/Photoshoot.dc.html">Photoshoot</a>
+      <a href="Music Videos/Music Videos.dc.html">Music Videos</a>
+      <a href="Creative Direction/Creative Direction.dc.html">Creative Direction</a>
+      <a href="Contact.dc.html">Contact</a>
+    </div>
+  </div>
+
+  <div data-m="stack" style="display:grid;grid-template-columns:minmax(0,0.5fr) minmax(0,1.22fr);align-items:stretch;border-bottom:1px solid #1f1f1f;">
+
+    <sc-if value="{{ showPortrait }}" hint-placeholder-val="{{ true }}">
+      <div data-m="nbr ph" style="position:relative;min-width:0;min-height:560px;height:100%;background:#0a0a0a;border-right:1px solid #1f1f1f;">
+        <img src="stills/andrew-portrait.jpg" alt="Andrew Caso" style="width:100%;height:auto;display:block;">
+      </div>
+    </sc-if>
+
+    <div data-m="pad" style="min-width:0;padding:56px 40px 64px;display:flex;flex-direction:column;gap:44px;">
+      <div>
+        <span style="display:block;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:#d70015;margin-bottom:22px;">Production Design · Creative Direction · Los Angeles</span>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:22px;max-width:62ch;">
+        <p style="font-size:17px;line-height:1.72;color:#b8b3a7;margin:0;text-wrap:pretty;">Andrew Caso is a production designer and creative director based in Los Angeles. Raised in the Bay Area, he has spent the last seven years on sets across the city, creating alongside some of its most established creatives.</p>
+      </div>
+
+      <div style="display:grid;grid-template-columns:auto 1fr;gap:16px 28px;padding-top:36px;border-top:1px solid #1f1f1f;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;">
+        <span style="color:#d70015;">Based</span><span style="color:#f4f1ea;">Los Angeles, CA</span>
+        <span style="color:#d70015;">Roles</span><span style="color:#f4f1ea;">Production Design / Creative Direction</span>
+        <span style="color:#d70015;">Work</span><span style="color:#f4f1ea;">Commercial · Photoshoot · Music Videos · Film</span>
+        <span style="color:#d70015;">Status</span><span style="color:#f4f1ea;">Booking select projects — '26</span>
+      </div>
+
+      <div style="display:flex;flex-wrap:wrap;gap:26px;font-family:'Space Mono',monospace;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;">
+        <a href="Contact.dc.html" style="border-bottom:1px solid #2a2a2a;padding-bottom:7px;">→ Get in touch</a>
+        <a href="https://www.instagram.com/andrewcaso/" style="border-bottom:1px solid #2a2a2a;padding-bottom:7px;">Instagram</a>
+        <a href="https://www.linkedin.com/in/andrew-caso-229284204" style="border-bottom:1px solid #2a2a2a;padding-bottom:7px;">LinkedIn</a>
+      </div>
+    </div>
+  </div>
+
+  <sc-if value="{{ showAwards }}" hint-placeholder-val="{{ true }}">
+    <div data-m="pad stack" style="display:grid;grid-template-columns:0.28fr 1fr;gap:40px;padding:56px 40px 64px;border-bottom:1px solid #1f1f1f;">
+      <span style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;color:#d70015;">Recognition</span>
+      <div style="display:flex;flex-direction:column;">
+        <div style="display:grid;grid-template-columns:64px 1fr auto;gap:24px;align-items:baseline;padding-bottom:22px;border-bottom:1px solid #1f1f1f;">
+          <span style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.14em;color:#8a857b;">'25</span>
+          <span style="font-family:'Archivo',sans-serif;font-weight:900;font-stretch:112%;text-transform:uppercase;font-size:clamp(20px,2.2vw,30px);line-height:1.05;letter-spacing:-0.025em;color:#f4f1ea;">HVMAS Production Designer of the Year</span>
+          <span style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#d70015;">Nominee</span>
+        </div>
+        <div style="display:grid;grid-template-columns:64px 1fr auto;gap:24px;align-items:baseline;padding:22px 0 0;">
+          <span style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.14em;color:#8a857b;">'26</span>
+          <span style="font-family:'Archivo',sans-serif;font-weight:900;font-stretch:112%;text-transform:uppercase;font-size:clamp(20px,2.2vw,30px);line-height:1.05;letter-spacing:-0.025em;color:#f4f1ea;">Berlin Commercial Shortlist</span>
+          <span style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#d70015;">Finalist</span>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ showClients }}" hint-placeholder-val="{{ true }}">
+    <div data-m="pad stack" style="display:grid;grid-template-columns:0.28fr 1fr;gap:40px;padding:56px 40px 72px;border-bottom:1px solid #1f1f1f;">
+      <span style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;color:#d70015;">Clients</span>
+      <div data-m="clients" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:18px 28px;font-family:'Space Mono',monospace;font-size:13px;letter-spacing:0.08em;text-transform:uppercase;color:#f4f1ea;">
+        <span>Nike SB</span>
+        <span>Adidas</span>
+        <span>Google</span>
+        <span>Beats</span>
+        <span>AT&amp;T</span>
+        <span>BET</span>
+        <span>Android</span>
+        <span>DEGREE</span>
+        <span>Coke Studio</span>
+        <span>F45 Training</span>
+        <span>Bandit Running</span>
+        <span>Nexxus</span>
+        <span>Caliwater</span>
+        <span>Kai Cenat</span>
+      </div>
+    </div>
+  </sc-if>
+
+  <div data-m="pad" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px;padding:34px 40px;">
+    <a href="mailto:andrewjcaso@gmail.com" style="font-family:'Archivo',sans-serif;font-weight:900;font-stretch:112%;text-transform:uppercase;font-size:clamp(20px,3vw,26px);letter-spacing:-0.02em;">andrewjcaso@gmail.com</a>
+    <div style="display:flex;gap:22px;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:#f4f1ea;">
+      <a href="https://www.instagram.com/andrewcaso/">Instagram</a>
+      <a href="https://www.linkedin.com/in/andrew-caso-229284204">LinkedIn</a>
+    </div>
+    <span style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.14em;color:#d70015;">© '26 K.SO<span style="color:#d70015;">*</span> — LOS ANGELES</span>
+  </div>
+
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;showPortrait&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Sections&quot;},&quot;showAwards&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Sections&quot;},&quot;showClients&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Sections&quot;}}">
+class Component extends DCLogic {
+  state = { clock: '' };
+  componentDidMount() {
+    const p = (n) => String(n).padStart(2, '0');
+    const tick = () => { const d = new Date(); this.setState({ clock: p(d.getHours())+':'+p(d.getMinutes())+':'+p(d.getSeconds()) }); };
+    tick();
+    this._t = setInterval(tick, 1000);
+  }
+  componentWillUnmount() { clearInterval(this._t); }
+  renderVals() {
+    return {
+      clock: this.state.clock,
+      showPortrait: this.props.showPortrait ?? true,
+      showAwards: this.props.showAwards ?? true,
+      showClients: this.props.showClients ?? true,
+    };
+  }
+}
+
+</script>
+</body>
+</html>

@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+<template id="__bundler_thumbnail" data-bg-color="#0a0a0a">
+  <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+    <rect width="1200" height="800" fill="#0a0a0a"></rect>
+    <text x="600" y="430" fill="#f4f1ea" font-family="ui-monospace, Menlo, monospace" font-size="150" font-weight="700" letter-spacing="8" text-anchor="middle">K.SO</text>
+    <text x="905" y="360" fill="#d70015" font-family="ui-monospace, Menlo, monospace" font-size="150" font-weight="700" text-anchor="middle">*</text>
+  </svg>
+</template>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&amp;family=Space+Mono:ital,wght@0,400;0,700;1,400&amp;family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300&amp;display=swap" rel="stylesheet">
+<script src="image-slot.js"></script>
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: #0a0a0a; }
+  a { color: #f4f1ea; text-decoration: none; }
+  a:hover { color: #d70015; }
+  @keyframes kup { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes kmar { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  @keyframes kgrain {
+    0% { transform: translate(0,0); }
+    10% { transform: translate(-4%,-3%); }
+    20% { transform: translate(-8%,2%); }
+    30% { transform: translate(3%,-6%); }
+    40% { transform: translate(-2%,7%); }
+    50% { transform: translate(-9%,-2%); }
+    60% { transform: translate(6%,4%); }
+    70% { transform: translate(-3%,5%); }
+    80% { transform: translate(7%,-4%); }
+    90% { transform: translate(-5%,3%); }
+    100% { transform: translate(0,0); }
+  }
+  @keyframes khaze {
+    0% { transform: scale(1); opacity:0.5; }
+    50% { transform: scale(1.14); opacity:0.85; }
+    100% { transform: scale(1); opacity:0.5; }
+  }
+  @keyframes kspin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+  @keyframes kmar2 { from { transform: translateX(-50%); } to { transform: translateX(0); } }
+  @keyframes kblink { 0%,100% { opacity: 1; } 50% { opacity: 0.25; } }
+
+  /* phone layout (<=720px) — desktop untouched */
+  @media (max-width: 720px) {
+    [data-m~="pad"] { padding-left: 20px !important; padding-right: 20px !important; }
+    [data-m~="cl"] { left: 20px !important; }
+    [data-m~="cr"] { right: 20px !important; }
+    [data-m~="nav"] { flex-wrap: wrap !important; gap: 14px 20px !important; padding-top: 16px !important; padding-bottom: 16px !important; }
+    [data-m~="navlinks"] { flex-wrap: wrap !important; gap: 10px 16px !important; width: 100% !important; font-size: 10px !important; }
+    [data-m~="sb"] { flex-wrap: wrap !important; gap: 6px 16px !important; }
+    [data-m~="sb"] > * { white-space: normal !important; }
+    [data-m~="stack"] { grid-template-columns: minmax(0,1fr) !important; }
+    [data-m~="stack"] > div:empty { display: none !important; }
+    [data-m~="nbr"] { border-right: 0 !important; border-bottom: 1px solid #1f1f1f !important; }
+    [data-m~="ph"] { min-height: 0 !important; height: auto !important; }
+    [data-m~="g1"] { grid-template-columns: minmax(0,1fr) !important; }
+    [data-m~="g2"] { grid-template-columns: repeat(2, minmax(0,1fr)) !important; gap: 10px !important; }
+    [data-m~="clients"] { grid-template-columns: repeat(2, minmax(0,1fr)) !important; }
+    [data-m~="pn"] > a > span:last-child { font-size: 16px !important; }
+    [data-m~="frames"] { gap: 56px !important; padding-top: 48px !important; padding-bottom: 56px !important; }
+    [data-reveal-block] { grid-template-columns: minmax(0,1fr) !important; width: 100% !important; gap: 12px !important; justify-content: stretch !important; }
+    [data-reveal-block] > * { grid-column: auto !important; }
+    [data-reveal-block] > [data-reveal="cap"]:first-child, [data-reveal-block] > :first-child:has([data-reveal="cap"]) { order: 2; padding-bottom: 0 !important; }
+    [data-m~="hide"], pre[aria-hidden] { display: none !important; }
+    [data-m~="work"] { padding-bottom: 120px !important; }
+    h1 { overflow-wrap: anywhere; }
+  }
+</style>
+</helmet>
+
+<div style="background:#0a0a0a;color:#f4f1ea;font-family:'Archivo',sans-serif;min-height:100vh;">
+
+  <!-- scroll progress hairline -->
+  <div aria-hidden="true" style="position:fixed;top:0;left:0;right:0;height:2px;z-index:50;background:transparent;">
+    <div ref="{{ progressRef }}" style="height:100%;width:0%;background:#d70015;"></div>
+  </div>
+
+  <!-- nav -->
+  <div data-m="nav pad" style="display:flex;justify-content:space-between;align-items:center;padding:22px 40px;border-bottom:1px solid #1f1f1f;">
+    <a href="#top" style="display:flex;align-items:center;gap:12px;">
+      <img src="assets/logo-mark.png" alt="" style="width:34px;height:34px;object-fit:contain;">
+      <span style="font-family:'Archivo',sans-serif;font-weight:900;font-stretch:112%;font-size:20px;letter-spacing:-0.02em;text-transform:uppercase;">K.SO<span style="color:#d70015;">*</span></span>
+    </a>
+    <div data-m="navlinks" style="display:flex;gap:26px;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:#b8b3a7;">
+      <a href="Commercial/Commercial.dc.html">Commercial</a>
+      <a href="Photoshoot/Photoshoot.dc.html">Photoshoot</a>
+      <a href="Music Videos/Music Videos.dc.html">Music Videos</a>
+      <a href="Creative Direction/Creative Direction.dc.html">Creative Direction</a>
+      <a href="Contact.dc.html" style="color:#d70015;">Contact</a>
+    </div>
+  </div>
+
+  <!-- hero -->
+  <div id="top" data-m="pad" style="position:relative;padding:96px 40px 72px;overflow-x:clip;overflow-y:visible;">
+    <!-- animated texture behind name — fixed to viewport, breathing -->
+    <div aria-hidden="true" style="position:fixed;left:0;right:0;top:0;height:70vh;pointer-events:none;z-index:0;overflow:hidden;">
+      <div style="position:absolute;left:6%;top:24%;width:48%;height:70%;background:radial-gradient(closest-side, rgba(215,0,21,0.42), rgba(215,0,21,0) 72%);filter:blur(48px);transform-origin:center;animation:khaze 9s ease-in-out infinite;"></div>
+      
+    </div>
+    <span data-m="cl" style="position:absolute;top:34px;left:40px;z-index:2;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.18em;color:#d70015;">K.SO / LOS ANGELES</span>
+    <span data-m="cr" style="position:absolute;top:34px;right:40px;z-index:2;display:flex;align-items:center;gap:8px;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.18em;color:#d70015;"><span style="width:6px;height:6px;background:#d70015;border-radius:999px;animation:kblink 2s ease-in-out infinite;"></span>{{ clock }}</span>
+    <!-- crosshair ticks framing the hero -->
+    <span aria-hidden="true" data-m="cl" style="position:absolute;bottom:28px;left:40px;z-index:2;font-family:'Space Mono',monospace;font-size:14px;color:#2a2a2a;">+</span>
+    <span aria-hidden="true" data-m="cr" style="position:absolute;bottom:28px;right:40px;z-index:2;font-family:'Space Mono',monospace;font-size:14px;color:#2a2a2a;">+</span>
+    <pre aria-hidden="true" style="position:absolute;top:88px;right:5%;z-index:1;margin:0;font-family:'Space Mono',monospace;font-size:10px;line-height:1.15;color:#f4f1ea;opacity:0.28;filter:blur(3px);white-space:pre;pointer-events:none;user-select:none;animation:kup 600ms cubic-bezier(0.2,0.7,0.2,1) 180ms both;">                      +OOz'
+                     z####O
+          .         .@####$         .:'
+       .z@#@o:      u#####@u;     :o@##O'
+       z######0=  .=o$#####0Ou: 'O######=
+       .z@#####@zz0u;$####@' =@$#######$.
+         'o#######oo+0#####@u0#######$0'
+           :O######@0#############$+; ;.
+             :O##################O;:: uo'
+       .  .=..'u################$uOzzzuz0o'
+    .z@#################################@z
+    +######################################@
+    :@####################################$u
+     :O#@z=;::==@###############=;z+;;;u='
+       :;    'o##################z';:
+      .:':;=z@######################O.
+       ; =@######@oO$######OOO#######$=
+       :u@#####O '=#####@   :O#######o.
+       0#####@z:u=.;o######0+:::;0######z
+       z####0=::   '=######z.:  ::u@####+
+        :uz+.       =######@;'     .=u+'
+                    :######0:
+                     o####0.
+                      .;:.</pre>
+    <h1 style="position:relative;z-index:1;font-family:'Archivo',sans-serif;font-weight:900;font-stretch:112%;text-transform:uppercase;font-size:clamp(64px,13vw,160px);line-height:0.84;letter-spacing:-0.04em;margin:0;">
+      <span style="display:block;animation:kup 560ms cubic-bezier(0.2,0.7,0.2,1) 40ms both;">Andrew</span>
+      <span style="display:block;animation:kup 560ms cubic-bezier(0.2,0.7,0.2,1) 120ms both;">Caso<span style="color:#d70015;">.</span></span>
+    </h1>
+    <p style="position:relative;z-index:1;max-width:520px;margin:38px 0 0 auto;font-size:18px;line-height:1.6;color:#b8b3a7;animation:kup 600ms cubic-bezier(0.2,0.7,0.2,1) 200ms both;">
+      <strong style="display:block;color:#f4f1ea;font-weight:600;">Every idea has its own language.</strong>
+      I help brands and artists define it through creative direction, spatial design, and physical experiences.
+    </p>
+    <div style="display:flex;justify-content:flex-end;margin-top:28px;animation:kup 600ms cubic-bezier(0.2,0.7,0.2,1) 260ms both;position:relative;z-index:20;">
+      <div onMouseEnter="{{ workMenuEnter }}" onMouseLeave="{{ workMenuLeave }}" style="position:relative;z-index:3;">
+        <span style="display:block;cursor:pointer;font-family:'Space Mono',monospace;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;color:#f4f1ea;border:1px solid #2a2a2a;padding:14px 26px;transition:all 120ms cubic-bezier(0.2,0.7,0.2,1);" style-hover="background:#d70015;border-color:#d70015;">See the work {{ workMenuGlyph }}</span>
+        <sc-if value="{{ workMenuOpen }}" hint-placeholder-val="{{ false }}">
+          <div style="position:absolute;top:100%;right:0;min-width:100%;background:#0a0a0a;border:1px solid #2a2a2a;border-top:0;display:flex;flex-direction:column;">
+            <a href="Commercial/Commercial.dc.html" style="display:block;white-space:nowrap;font-family:'Space Mono',monospace;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;color:#f4f1ea;padding:13px 26px;border-bottom:1px solid #1f1f1f;" style-hover="background:#d70015;color:#f4f1ea;">Commercial</a>
+            <a href="Photoshoot/Photoshoot.dc.html" style="display:block;white-space:nowrap;font-family:'Space Mono',monospace;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;color:#f4f1ea;padding:13px 26px;border-bottom:1px solid #1f1f1f;" style-hover="background:#d70015;color:#f4f1ea;">Photoshoot</a>
+            <a href="Music Videos/Music Videos.dc.html" style="display:block;white-space:nowrap;font-family:'Space Mono',monospace;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;color:#f4f1ea;padding:13px 26px;border-bottom:1px solid #1f1f1f;" style-hover="background:#d70015;color:#f4f1ea;">Music Videos</a>
+            <a href="Creative Direction/Creative Direction.dc.html" style="display:block;white-space:nowrap;font-family:'Space Mono',monospace;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;color:#f4f1ea;padding:13px 26px;" style-hover="background:#d70015;color:#f4f1ea;">Creative Direction</a>
+          </div>
+        </sc-if>
+      </div>
+    </div>
+  <div style="position: absolute; inset: -40%; background-image: url('data:image/svg+xml;utf8,&lt;svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22160%22 height=%22160%22&gt;&lt;filter id=%22n%22&gt;&lt;feTurbulence type=%22fractalNoise%22 baseFrequency=%220.9%22 numOctaves=%222%22 stitchTiles=%22stitch%22/&gt;&lt;/filter&gt;&lt;rect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23n)%22/&gt;&lt;/svg&gt;'); opacity: 0.10; mix-blend-mode: screen; animation: kgrain 3.4s steps(6) infinite; left: -942px; top: -281px; pointer-events: none;"></div></div>
+
+
+
+  <!-- selected work grid -->
+  <div id="work" data-m="pad work" style="position:relative;padding:0 40px 260px 72px;">
+    <!-- vertical section label -->
+    <span aria-hidden="true" data-m="hide" style="position:absolute;left:28px;top:120px;transform:rotate(180deg);writing-mode:vertical-rl;font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.3em;text-transform:uppercase;color:#4a4640;">Production Design — Los Angeles</span>
+    <div data-reveal="1" data-m="sb" style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:20px;">
+      <span style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;color:#b8b3a7;">Selected Work</span>
+      <span style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#d70015;">'19 — '26</span>
+    </div>
+    <div data-reveal="1" data-m="g1" style="display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:#1f1f1f;border:1px solid #1f1f1f;">
+      <sc-for list="{{ aWorks }}" as="w" hint-placeholder-count="6">
+        <div style="background:#0a0a0a;padding:0;">
+          <a href="{{ w.href }}" onMouseEnter="{{ w.onEnter }}" onMouseLeave="{{ w.onLeave }}" style="{{ w.dimStyle }}">
+            <div style="position:relative;aspect-ratio:4/3;background:#141414;overflow:hidden;">
+              <div style="{{ w.imgStyle }}">
+                <image-slot id="{{ w.slotId }}" shape="rect" fit="{{ w.fit }}" src="{{ w.src }}" placeholder="{{ w.ph }}" style="{{ w.photoStyle }}"></image-slot>
+              </div>
+              <div style="{{ w.crestStyle }}"></div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:8px;padding:14px;">
+              <span style="font-family:'Archivo',sans-serif;font-weight:900;font-stretch:112%;text-transform:uppercase;font-size:15px;line-height:1.05;letter-spacing:-0.01em;color:#f4f1ea;">{{ w.title }}</span>
+              <div style="display:flex;justify-content:space-between;font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:#d70015;">
+                <span style="color:#b8b3a7;">{{ w.cat }}</span>
+                <span>NO. {{ w.no }}</span>
+              </div>
+            </div>
+          </a>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+
+
+  <!-- about (1b layout, dark) -->
+  <div data-m="stack" style="display:grid;grid-template-columns:290px 1fr;border-top:1px solid #1f1f1f;">
+    <div data-m="nbr" style="position:relative;min-height:420px;background:#0a0a0a;border-right:1px solid #1f1f1f;">
+      <image-slot id="c-portrait" shape="rect" placeholder="Portrait / process shot" style="width:100%;height:100%;display:block;"></image-slot>
+    </div>
+    <div data-reveal="1" data-m="pad" style="padding:64px 40px 64px 20px;">
+      <span style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;color:#d70015;">About</span>
+      <p style="font-family:'Archivo',sans-serif;font-weight:900;font-stretch:112%;text-transform:uppercase;font-size:34px;line-height:1.02;letter-spacing:-0.02em;color:#f4f1ea;margin:22px 0 24px;max-width:808px;">2025 HVMAS Production Designer of the Year Nominee&nbsp;</p>
+      <p style="font-size:17px;line-height:1.7;color:#b8b3a7;margin:0 0 28px;max-width:748px;">Working across creative direction and production design to shape environments, objects, and moments that give brands and artists a world of their own.</p>
+      <a href="About.dc.html" style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;color:#f4f1ea;border-bottom:1px solid #2a2a2a;">→ About Andrew</a>
+    </div>
+  </div>
+
+  <!-- footer / contact -->
+  <div id="contact" data-m="pad" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px;padding:34px 40px;border-top:1px solid #1f1f1f;">
+    <a href="mailto:andrewjcaso@gmail.com" style="font-family:'Archivo',sans-serif;font-weight:900;font-stretch:112%;text-transform:uppercase;font-size:clamp(20px,3vw,26px);letter-spacing:-0.02em;">andrewjcaso@gmail.com</a>
+    <div style="display:flex;gap:22px;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:#b8b3a7;">
+      <a href="https://www.instagram.com/andrewcaso/">Instagram</a>
+      <a href="https://www.linkedin.com/in/andrew-caso-229284204">LinkedIn</a>
+    </div>
+    <span style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.14em;color:#d70015;">© '26 K.SO<span style="color:#d70015;">*</span> — LOS ANGELES</span>
+  </div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { clock: '', hoverA: null, workMenuOpen: false };
+  _progressRef = React.createRef();
+
+  componentDidMount() {
+    const p = (n) => String(n).padStart(2, '0');
+    const tick = () => {
+      const d = new Date();
+      this.setState({ clock: `${p(d.getHours())}:${p(d.getMinutes())}:${p(d.getSeconds())}` });
+    };
+    tick();
+    this._t = setInterval(tick, 1000);
+
+    // scroll progress hairline
+    this._onScroll = () => {
+      const el = this._progressRef.current;
+      if (!el) return;
+      const doc = document.documentElement;
+      const max = doc.scrollHeight - doc.clientHeight;
+      el.style.width = max > 0 ? `${(doc.scrollTop / max) * 100}%` : '0%';
+    };
+    window.addEventListener('scroll', this._onScroll, { passive: true });
+    this._onScroll();
+
+    // scroll reveals: opacity + 12px translate, staggerless dissolve-in
+    const nodes = document.querySelectorAll('[data-reveal]');
+    nodes.forEach((n) => {
+      n.style.opacity = '0';
+      n.style.transform = 'translateY(12px)';
+      n.style.transition = 'opacity 420ms cubic-bezier(0.2,0.7,0.2,1), transform 420ms cubic-bezier(0.2,0.7,0.2,1)';
+    });
+    this._io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          e.target.style.opacity = '1';
+          e.target.style.transform = 'translateY(0)';
+          this._io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    nodes.forEach((n) => this._io.observe(n));
+  }
+  componentWillUnmount() {
+    clearInterval(this._t);
+    window.removeEventListener('scroll', this._onScroll);
+    if (this._io) this._io.disconnect();
+  }
+
+  makeItems(prefix, hoverKey, defs) {
+    const hover = this.state[hoverKey];
+    return defs.map((d, i) => ({
+      cat: d.cat,
+      no: d.no,
+      title: d.title,
+      src: d.src,
+      ph: `${d.title} — drop image`,
+      slotId: d.slotId,
+      fit: 'cover',
+      photoStyle: 'width:100%;height:100%;display:block;pointer-events:none;' + (d.crest ? 'opacity:0.5;' : ''),
+      crestStyle: d.crest
+        ? `position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);height:62%;aspect-ratio:1/1;background:url(${d.crest}) center/contain no-repeat;pointer-events:none;z-index:2;`
+        : 'display:none;',
+      href: d.href,
+      dimStyle: {
+        opacity: hover !== null && hover !== i ? 0.35 : 1,
+        transition: 'opacity 260ms cubic-bezier(0.2,0.7,0.2,1)',
+      },
+      imgStyle: {
+        width: '100%', height: '100%',
+        transform: hover === i ? 'scale(1.035)' : 'scale(1)',
+        transition: 'transform 420ms cubic-bezier(0.2,0.7,0.2,1)',
+      },
+      onEnter: () => this.setState({ [hoverKey]: i }),
+      onLeave: () => this.setState({ [hoverKey]: null }),
+    }));
+  }
+
+  renderVals() {
+    const CDN = 'https://images.squarespace-cdn.com/content/v1/6435e3fff1796c2d70570c03/';
+    const A = [
+      { slotId: 'sw-adidas', cat: 'Commercial', no: '007', title: 'Crazy Lite Shorts', href: 'Commercial/Project - Adidas Crazy Lite Shorts.dc.html',
+        src: CDN + 'ce07cfb2-8c44-4b80-a93c-b292a08dae6d/Screenshot+2025-05-06+at+11.56.34%E2%80%AFPM.png?format=1500w' },
+      { slotId: 'sw-speeddemon', cat: 'Music Video', no: '048', title: 'Speed Demon', href: 'Music Videos/Project - Speed Demon.dc.html',
+        src: 'https://i.ytimg.com/vi/3_soAloXjEg/maxresdefault.jpg' },
+      { slotId: 'sw-hardstone', cat: 'Photoshoot', no: '015', title: 'Hardstone Psycho', href: 'Photoshoot/Project - Hardstone Psycho.dc.html',
+        src: CDN + '264c9b78-4fa4-44c4-bc71-dc869d8c8c09/tempImagekFuxQW.jpg?format=1500w' },
+      { slotId: 'sw-frosty', cat: 'Commercial', no: '001', title: "Frosty's Motel", href: 'Commercial/Project - Frostys Motel.dc.html',
+        src: 'stills/frostys-motel-01.jpg' },
+      { slotId: 'sw-earnedit', cat: 'Music Video', no: '049', title: 'Earnëd It', href: 'Music Videos/Project - Earned It.dc.html',
+        src: 'stills/earned-it-cover.png' },
+      { slotId: 'sw-blues', cat: 'Photoshoot', no: '026', title: 'My 21st Century Blues', href: 'Photoshoot/Project - My 21st Century Blues.dc.html',
+        src: CDN + '5f610c44-dee8-4582-b429-f0be1a4759a1/DC5B7394-BD1B-4072-BF4F-6D8794EAD3F3.jpg?format=1500w' },
+    ];
+    return {
+      clock: this.state.clock,
+      progressRef: this._progressRef,
+      aWorks: this.makeItems('c-w', 'hoverA', A),
+      workMenuOpen: this.state.workMenuOpen,
+      workMenuGlyph: this.state.workMenuOpen ? '↓' : '→',
+      workMenuEnter: () => this.setState({ workMenuOpen: true }),
+      workMenuLeave: () => this.setState({ workMenuOpen: false }),
+    };
+  }
+}
+</script>
+</body>
+</html>

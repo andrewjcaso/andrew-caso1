@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="../support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&amp;family=Space+Mono:ital,wght@0,400;0,700;1,400&amp;family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300&amp;display=swap" rel="stylesheet">
+<script src="../image-slot.js"></script>
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: #0a0a0a; }
+  a { color: #f4f1ea; text-decoration: none; }
+  a:hover { color: #d70015; }
+
+  [data-motion] [data-reveal] {
+    opacity: 0;
+    transform: translateY(48px);
+    transition: opacity 1100ms cubic-bezier(.16,1,.3,1), transform 1100ms cubic-bezier(.16,1,.3,1);
+    will-change: opacity, transform;
+  }
+  [data-motion] [data-reveal="img2"] { transition-delay: 170ms; }
+  [data-motion] [data-reveal="cap"],
+  [data-motion] [data-reveal="cap2"] {
+    transform: translateY(20px);
+    transition-duration: 900ms;
+    transition-delay: 340ms;
+  }
+  [data-motion] [data-reveal="cap2"] { transition-delay: 510ms; }
+  [data-motion] [data-shown] [data-reveal] { opacity: 1; transform: translateY(0); }
+  @media (prefers-reduced-motion: reduce) {
+    [data-motion] [data-reveal] { opacity: 1; transform: none; transition: none; }
+  }
+
+  /* phone layout (<=720px) — desktop untouched */
+  @media (max-width: 720px) {
+    [data-m~="pad"] { padding-left: 20px !important; padding-right: 20px !important; }
+    [data-m~="cl"] { left: 20px !important; }
+    [data-m~="cr"] { right: 20px !important; }
+    [data-m~="nav"] { flex-wrap: wrap !important; gap: 14px 20px !important; padding-top: 16px !important; padding-bottom: 16px !important; }
+    [data-m~="navlinks"] { flex-wrap: wrap !important; gap: 10px 16px !important; width: 100% !important; font-size: 10px !important; }
+    [data-m~="sb"] { flex-wrap: wrap !important; gap: 6px 16px !important; }
+    [data-m~="sb"] > * { white-space: normal !important; }
+    [data-m~="stack"] { grid-template-columns: minmax(0,1fr) !important; }
+    [data-m~="stack"] > div:empty { display: none !important; }
+    [data-m~="nbr"] { border-right: 0 !important; border-bottom: 1px solid #1f1f1f !important; }
+    [data-m~="ph"] { min-height: 0 !important; height: auto !important; }
+    [data-m~="g1"] { grid-template-columns: minmax(0,1fr) !important; }
+    [data-m~="g2"] { grid-template-columns: repeat(2, minmax(0,1fr)) !important; gap: 10px !important; }
+    [data-m~="clients"] { grid-template-columns: repeat(2, minmax(0,1fr)) !important; }
+    [data-m~="pn"] > a > span:last-child { font-size: 16px !important; }
+    [data-m~="frames"] { gap: 56px !important; padding-top: 48px !important; padding-bottom: 56px !important; }
+    [data-reveal-block] { grid-template-columns: minmax(0,1fr) !important; width: 100% !important; gap: 12px !important; justify-content: stretch !important; }
+    [data-reveal-block] > * { grid-column: auto !important; }
+    [data-reveal-block] > [data-reveal="cap"]:first-child, [data-reveal-block] > :first-child:has([data-reveal="cap"]) { order: 2; padding-bottom: 0 !important; }
+    [data-m~="hide"], pre[aria-hidden] { display: none !important; }
+    [data-m~="work"] { padding-bottom: 120px !important; }
+    h1 { overflow-wrap: anywhere; }
+  }
+</style>
+</helmet>
+
+<div data-motion-root="" style="background:#0a0a0a;color:#f4f1ea;font-family:'Archivo',sans-serif;min-height:100vh;">
+
+  <div data-m="nav pad" style="display:flex;justify-content:space-between;align-items:center;padding:22px 40px;border-bottom:1px solid #1f1f1f;">
+    <a href="../Andrew Caso Landing - Combined.dc.html" style="display:flex;align-items:center;gap:12px;">
+      <img src="../assets/logo-mark.png" alt="" style="width:34px;height:34px;object-fit:contain;">
+      <span style="font-family:'Archivo',sans-serif;font-weight:900;font-stretch:112%;font-size:20px;letter-spacing:-0.02em;text-transform:uppercase;">K.SO<span style="color:#d70015;">*</span></span>
+    </a>
+    <div data-m="navlinks" style="display:flex;gap:26px;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:#f4f1ea;">
+      <a href="../Andrew Caso Landing - Combined.dc.html">Home</a>
+      <a href="../Commercial/Commercial.dc.html">Commercial</a>
+      <a href="Photoshoot.dc.html" style="color:#d70015;">Photoshoot</a>
+      <a href="../Music Videos/Music Videos.dc.html">Music Videos</a>
+      <a href="../Creative Direction/Creative Direction.dc.html">Creative Direction</a>
+      <a href="../Contact.dc.html">Contact</a>
+    </div>
+  </div>
+
+  <div data-m="pad" style="position:relative;padding:34px 40px 30px;border-bottom:1px solid #1f1f1f;">
+    <div style="display:flex;justify-content:space-between;align-items:center;">
+      <a href="Photoshoot.dc.html" style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:#f4f1ea;">← Photoshoot</a>
+      <span style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.18em;color:#d70015;">{{ clock }}</span>
+    </div>
+  </div>
+
+  <div data-m="pad" style="padding:80px 40px 56px;">
+    <span style="display:block;font-family:'Space Mono',monospace;font-size:12px;letter-spacing:0.2em;text-transform:uppercase;color:#d70015;margin-bottom:20px;">Commercial · NO. 021</span>
+    <h1 style="font-family:'Archivo',sans-serif;font-weight:900;font-stretch:112%;text-transform:uppercase;font-size:clamp(44px,8vw,104px);line-height:0.86;letter-spacing:-0.04em;margin:0;max-width:15ch;">Skims Men<span style="color:#d70015;">.</span></h1>
+  </div>
+
+  <div data-m="stack" style="display:grid;grid-template-columns:0.42fr 0.58fr;gap:1px;background:#1f1f1f;border-top:1px solid #1f1f1f;border-bottom:1px solid #1f1f1f;">
+    <div data-m="pad" style="background:#0a0a0a;padding:40px;min-width:0;">
+      <div style="display:grid;grid-template-columns:auto 1fr;gap:14px 20px;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;">
+        <span style="color:#d70015;">Year</span><span style="color:#f4f1ea;">'25</span>
+        <span style="color:#d70015;">Role</span><span style="color:#f4f1ea;">Production Designer</span>
+        <span style="color:#d70015;">Client</span><span style="color:#f4f1ea;">Skims</span>
+        <span style="color:#d70015;">Production Company</span><span style="color:#f4f1ea;">Skims</span>
+        <span style="color:#d70015;">Photographer</span><span style="color:#f4f1ea;">Aidan Cullen</span>
+      </div>
+    </div>
+    <div style="background:#0a0a0a;"></div>
+  </div>
+
+  <div data-m="pad frames" style="display:flex;flex-direction:column;gap:112px;padding:88px 40px 96px;">
+
+    <div data-reveal-block="" style="display:grid;grid-template-columns:49.6% 1fr;gap:40px;align-items:end;width:80%;margin:0 auto;">
+      <div style="grid-column:1;">
+        <div data-reveal="img" style="position:relative;aspect-ratio:0.8100;background:#141414;border:1px solid #1f1f1f;overflow:hidden;">
+          <img src="https://images.squarespace-cdn.com/content/v1/6435e3fff1796c2d70570c03/a3bbac5e-ac92-4474-9cd0-9f6e792ddb94/tempImagevUBrb9.jpg?format=1500w" alt="" data-lb="https://images.squarespace-cdn.com/content/v1/6435e3fff1796c2d70570c03/a3bbac5e-ac92-4474-9cd0-9f6e792ddb94/tempImagevUBrb9.jpg?format=1500w" style="width:100%;height:100%;object-fit:cover;display:block;cursor:zoom-in;">
+        </div>
+        <sc-if value="{{ showCaptions }}" hint-placeholder-val="{{ true }}">
+          <div data-reveal="cap" style="padding-top:14px;display:flex;gap:14px;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;">
+            <span style="color:#d70015;">01</span>
+            <span style="color:#8a857b;">—</span>
+          </div>
+        </sc-if>
+      </div>
+    </div>
+
+    <div data-reveal-block="" style="display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:end;width:80%;margin:0 auto;">
+      <div>
+        <div data-reveal="img" style="position:relative;aspect-ratio:0.6667;background:#141414;border:1px solid #1f1f1f;overflow:hidden;">
+          <img src="https://images.squarespace-cdn.com/content/v1/6435e3fff1796c2d70570c03/6342a561-de0c-46ea-94f8-ac3f937bc498/07_LOOK_09_REJJIE_NAST_DALLAS_2143_FINAL.jpeg?format=1500w" alt="" data-lb="https://images.squarespace-cdn.com/content/v1/6435e3fff1796c2d70570c03/6342a561-de0c-46ea-94f8-ac3f937bc498/07_LOOK_09_REJJIE_NAST_DALLAS_2143_FINAL.jpeg?format=1500w" style="width:100%;height:100%;object-fit:cover;display:block;cursor:zoom-in;">
+        </div>
+        <sc-if value="{{ showCaptions }}" hint-placeholder-val="{{ true }}">
+          <div data-reveal="cap" style="padding-top:14px;display:flex;gap:14px;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;">
+            <span style="color:#d70015;">02</span>
+            <span style="color:#8a857b;">—</span>
+          </div>
+        </sc-if>
+      </div>
+      <div>
+        <div data-reveal="img2" style="position:relative;aspect-ratio:0.8020;background:#141414;border:1px solid #1f1f1f;overflow:hidden;">
+          <img src="https://images.squarespace-cdn.com/content/v1/6435e3fff1796c2d70570c03/34763845-eca8-4669-b47c-d22fe62d6e9b/06_IMG2073-R01-006_FINAL.jpeg?format=1500w" alt="" data-lb="https://images.squarespace-cdn.com/content/v1/6435e3fff1796c2d70570c03/34763845-eca8-4669-b47c-d22fe62d6e9b/06_IMG2073-R01-006_FINAL.jpeg?format=1500w" style="width:100%;height:100%;object-fit:cover;display:block;cursor:zoom-in;">
+        </div>
+        <sc-if value="{{ showCaptions }}" hint-placeholder-val="{{ true }}">
+          <div data-reveal="cap2" style="padding-top:14px;display:flex;gap:14px;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;">
+            <span style="color:#d70015;">03</span>
+            <span style="color:#8a857b;">—</span>
+          </div>
+        </sc-if>
+      </div>
+    </div>
+
+    <div data-reveal-block="" style="display:grid;grid-template-columns:68% 1fr;gap:40px;align-items:end;width:80%;margin:0 auto;">
+      <div style="grid-column:1;">
+        <div data-reveal="img" style="position:relative;aspect-ratio:1.5000;background:#141414;border:1px solid #1f1f1f;overflow:hidden;">
+          <img src="https://images.squarespace-cdn.com/content/v1/6435e3fff1796c2d70570c03/06dc3267-e65a-4913-be99-85629edc1d46/05_LOOK_01_REJJIE_NAST_DALLAS_1389_FINAL.jpeg?format=1500w" alt="" data-lb="https://images.squarespace-cdn.com/content/v1/6435e3fff1796c2d70570c03/06dc3267-e65a-4913-be99-85629edc1d46/05_LOOK_01_REJJIE_NAST_DALLAS_1389_FINAL.jpeg?format=1500w" style="width:100%;height:100%;object-fit:cover;display:block;cursor:zoom-in;">
+        </div>
+        <sc-if value="{{ showCaptions }}" hint-placeholder-val="{{ true }}">
+          <div data-reveal="cap" style="padding-top:14px;display:flex;gap:14px;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;">
+            <span style="color:#d70015;">04</span>
+            <span style="color:#8a857b;">—</span>
+          </div>
+        </sc-if>
+      </div>
+    </div>
+
+  </div>
+
+<div data-m="pn" style="display:grid;grid-template-columns:1fr 1fr;gap:1px;background:#1f1f1f;border-top:1px solid #1f1f1f;border-bottom:1px solid #1f1f1f;">
+    <a href="Project - Nike Diamond.dc.html" data-m="pad" style="background:#0a0a0a;padding:30px 40px;display:block;">
+      <span style="display:block;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:#d70015;margin-bottom:8px;">← Prev</span>
+      <span style="font-family:'Archivo',sans-serif;font-weight:900;font-stretch:112%;text-transform:uppercase;font-size:22px;letter-spacing:-0.02em;color:#f4f1ea;">Nike Diamond</span>
+    </a>
+    <a href="Project - Adidas x 100T.dc.html" data-m="pad" style="background:#0a0a0a;padding:30px 40px;display:block;text-align:right;">
+      <span style="display:block;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:#d70015;margin-bottom:8px;">Next →</span>
+      <span style="font-family:'Archivo',sans-serif;font-weight:900;font-stretch:112%;text-transform:uppercase;font-size:22px;letter-spacing:-0.02em;color:#f4f1ea;">Adidas x 100T</span>
+    </a>
+  </div>
+
+  <div data-m="pad" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px;padding:34px 40px;">
+    <a href="mailto:andrewjcaso@gmail.com" style="font-family:'Archivo',sans-serif;font-weight:900;font-stretch:112%;text-transform:uppercase;font-size:clamp(20px,3vw,26px);letter-spacing:-0.02em;">andrewjcaso@gmail.com</a>
+    <div style="display:flex;gap:22px;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:#f4f1ea;">
+      <a href="https://www.instagram.com/andrewcaso/">Instagram</a>
+      <a href="https://www.linkedin.com/in/andrew-caso-229284204">LinkedIn</a>
+    </div>
+    <span style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.14em;color:#d70015;">© '26 K.SO<span style="color:#d70015;">*</span> — LOS ANGELES</span>
+  </div>
+
+  <sc-if value="{{ lbOpen }}" hint-placeholder-val="{{ false }}">
+    <div onClick="{{ lbClose }}" style="position:fixed;inset:0;z-index:1000;background:rgba(10,10,10,0.94);display:flex;align-items:center;justify-content:center;padding:56px 84px;cursor:zoom-out;">
+      <div style="{{ lbImgStyle }}"></div>
+      <span data-m="cr" style="position:fixed;top:26px;right:40px;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.16em;color:#f4f1ea;">CLOSE ✕</span>
+      <span data-m="cl" style="position:fixed;bottom:26px;left:40px;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.16em;color:#d70015;">{{ lbPos }} / {{ lbTotal }}</span>
+      <sc-if value="{{ lbMany }}" hint-placeholder-val="{{ false }}">
+        <span onClick="{{ lbPrev }}" style="position:fixed;left:28px;top:50%;transform:translateY(-50%);font-family:'Space Mono',monospace;font-size:20px;color:#f4f1ea;cursor:pointer;padding:14px;">←</span>
+        <span onClick="{{ lbNext }}" style="position:fixed;right:28px;top:50%;transform:translateY(-50%);font-family:'Space Mono',monospace;font-size:20px;color:#f4f1ea;cursor:pointer;padding:14px;">→</span>
+      </sc-if>
+    </div>
+  </sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;showMotion&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Motion&quot;},&quot;showCaptions&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Sections&quot;}}">
+class Component extends DCLogic {
+  state = { clock: '', lb: null };
+  componentDidMount() {
+    const p = (n) => String(n).padStart(2, '0');
+    const tick = () => { const d = new Date(); this.setState({ clock: p(d.getHours())+':'+p(d.getMinutes())+':'+p(d.getSeconds()) }); };
+    tick();
+    this._t = setInterval(tick, 1000);
+    this._srcs = Array.from(new Set(Array.from(document.querySelectorAll('[data-lb]')).map((el) => el.getAttribute('data-lb'))));
+    this._click = (e) => {
+      const t = e.target && e.target.closest ? e.target.closest('[data-lb]') : null;
+      if (!t) return;
+      const i = this._srcs.indexOf(t.getAttribute('data-lb'));
+      if (i >= 0) this.setState({ lb: i });
+    };
+    document.addEventListener('click', this._click);
+    this._key = (e) => {
+      if (this.state.lb === null) return;
+      if (e.key === 'Escape') this.setState({ lb: null });
+      else if (e.key === 'ArrowLeft') this.lbStep(-1);
+      else if (e.key === 'ArrowRight') this.lbStep(1);
+    };
+    window.addEventListener('keydown', this._key);
+    this._motion();
+  }
+  // Reveal state lives on data attributes the template never declares, so the
+  // per-second clock re-render cannot reset it.
+  _motion() {
+    if ((this.props.showMotion ?? true) === false) return;
+    const root = document.querySelector('[data-motion-root]');
+    if (!root) return;
+    root.setAttribute('data-motion', '1');
+    if (!('IntersectionObserver' in window)) {
+      root.querySelectorAll('[data-reveal-block]').forEach(b => b.setAttribute('data-shown', ''));
+      return;
+    }
+    this._io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.intersectionRatio >= 0.12) e.target.setAttribute('data-shown', '');
+        else if (e.intersectionRatio === 0) e.target.removeAttribute('data-shown');
+      });
+    }, { threshold: [0, 0.12], rootMargin: '0px 0px -8% 0px' });
+    root.querySelectorAll('[data-reveal-block]').forEach(b => this._io.observe(b));
+  }
+  componentWillUnmount() {
+    clearInterval(this._t);
+    document.removeEventListener('click', this._click);
+    window.removeEventListener('keydown', this._key);
+    if (this._io) this._io.disconnect();
+  }
+  lbStep(d) { const n = this._srcs.length; if (!n) return; this.setState((s) => ({ lb: (s.lb + d + n) % n })); }
+  renderVals() {
+    const i = this.state.lb, srcs = this._srcs || [];
+    return {
+      clock: this.state.clock,
+      showCaptions: this.props.showCaptions ?? true,
+      lbOpen: i !== null,
+      lbMany: srcs.length > 1,
+      lbImgStyle: i !== null ? { width: '100%', height: '100%', background: 'url("' + srcs[i] + '") center / contain no-repeat' } : null,
+      lbPos: i !== null ? String(i + 1).padStart(2, '0') : '00',
+      lbTotal: String(srcs.length).padStart(2, '0'),
+      lbClose: () => this.setState({ lb: null }),
+      lbPrev: (e) => { e.stopPropagation(); this.lbStep(-1); },
+      lbNext: (e) => { e.stopPropagation(); this.lbStep(1); },
+    };
+  }
+}
+</script>
+</body>
+</html>

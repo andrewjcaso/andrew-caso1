@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="../support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&amp;family=Space+Mono:ital,wght@0,400;0,700;1,400&amp;family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300&amp;display=swap" rel="stylesheet">
+<script src="../image-slot.js"></script>
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: #0a0a0a; }
+  a { color: #f4f1ea; text-decoration: none; }
+  a:hover { color: #d70015; }
+  @keyframes kfade { from { opacity: 0; } to { opacity: 1; } }
+
+  /* phone layout (<=720px) — desktop untouched */
+  @media (max-width: 720px) {
+    [data-m~="pad"] { padding-left: 20px !important; padding-right: 20px !important; }
+    [data-m~="cl"] { left: 20px !important; }
+    [data-m~="cr"] { right: 20px !important; }
+    [data-m~="nav"] { flex-wrap: wrap !important; gap: 14px 20px !important; padding-top: 16px !important; padding-bottom: 16px !important; }
+    [data-m~="navlinks"] { flex-wrap: wrap !important; gap: 10px 16px !important; width: 100% !important; font-size: 10px !important; }
+    [data-m~="sb"] { flex-wrap: wrap !important; gap: 6px 16px !important; }
+    [data-m~="sb"] > * { white-space: normal !important; }
+    [data-m~="stack"] { grid-template-columns: minmax(0,1fr) !important; }
+    [data-m~="stack"] > div:empty { display: none !important; }
+    [data-m~="nbr"] { border-right: 0 !important; border-bottom: 1px solid #1f1f1f !important; }
+    [data-m~="ph"] { min-height: 0 !important; height: auto !important; }
+    [data-m~="g1"] { grid-template-columns: minmax(0,1fr) !important; }
+    [data-m~="g2"] { grid-template-columns: repeat(2, minmax(0,1fr)) !important; gap: 10px !important; }
+    [data-m~="clients"] { grid-template-columns: repeat(2, minmax(0,1fr)) !important; }
+    [data-m~="pn"] > a > span:last-child { font-size: 16px !important; }
+    [data-m~="frames"] { gap: 56px !important; padding-top: 48px !important; padding-bottom: 56px !important; }
+    [data-reveal-block] { grid-template-columns: minmax(0,1fr) !important; width: 100% !important; gap: 12px !important; justify-content: stretch !important; }
+    [data-reveal-block] > * { grid-column: auto !important; }
+    [data-reveal-block] > [data-reveal="cap"]:first-child, [data-reveal-block] > :first-child:has([data-reveal="cap"]) { order: 2; padding-bottom: 0 !important; }
+    [data-m~="hide"], pre[aria-hidden] { display: none !important; }
+    [data-m~="work"] { padding-bottom: 120px !important; }
+    h1 { overflow-wrap: anywhere; }
+  }
+</style>
+</helmet>
+
+<div style="background:#0a0a0a;color:#f4f1ea;font-family:'Archivo',sans-serif;min-height:100vh;">
+
+  <!-- nav -->
+  <div data-m="nav pad" style="display:flex;justify-content:space-between;align-items:center;padding:22px 40px;border-bottom:1px solid #1f1f1f;">
+    <a href="../Andrew Caso Landing - Combined.dc.html" style="display:flex;align-items:center;gap:12px;">
+      <img src="../assets/logo-mark.png" alt="" style="width:34px;height:34px;object-fit:contain;">
+      <span style="font-family:'Archivo',sans-serif;font-weight:900;font-stretch:112%;font-size:20px;letter-spacing:-0.02em;text-transform:uppercase;">K.SO<span style="color:#d70015;">*</span></span>
+    </a>
+    <div data-m="navlinks" style="display:flex;gap:26px;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:#f4f1ea;">
+      <a href="../Andrew Caso Landing - Combined.dc.html">Home</a>
+      <a href="../Commercial/Commercial.dc.html">Commercial</a>
+      <a href="../Photoshoot/Photoshoot.dc.html">Photoshoot</a>
+      <a href="Music Videos.dc.html" style="color:#d70015;">Music Videos</a>
+      <a href="../Creative Direction/Creative Direction.dc.html">Creative Direction</a>
+      <a href="../Contact.dc.html">Contact</a>
+    </div>
+  </div>
+
+  <!-- page header -->
+  <div data-m="pad" style="position:relative;padding:72px 40px 36px;">
+    <span data-m="cl" style="position:absolute;top:30px;left:40px;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.18em;color:#d70015;">K.SO / NO. 04 — <span style="letter-spacing: 0.18em;">PRODUCTION DESIGN</span></span>
+    <span data-m="cr" style="position:absolute;top:30px;right:40px;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.18em;color:#d70015;">{{ clock }}</span>
+    <h1 style="font-family:'Archivo',sans-serif;font-weight:900;font-stretch:112%;text-transform:uppercase;font-size:clamp(46px,8.4vw,110px);line-height:0.84;letter-spacing:-0.04em;margin:0;">Music Videos<span style="color:#d70015;">.</span></h1>
+  </div>
+
+  <!-- subhead -->
+  <div data-m="pad sb" style="display:flex;justify-content:space-between;align-items:baseline;padding:18px 40px;border-top:1px solid #1f1f1f;border-bottom:1px solid #1f1f1f;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;">
+    <span style="color:#f4f1ea;">{{ shownStr }}</span>
+    <div style="position:relative;">
+      <button onClick="{{ onToggleSort }}" style="appearance:none;background:none;border:0;padding:0;margin:0;cursor:pointer;display:flex;align-items:center;gap:9px;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#d70015;" style-hover="color:#f4f1ea">
+        <span>'23 — '26 · SORT: {{ sortLabel }}</span>
+        <span style="{{ caretStyle }}">▾</span>
+      </button>
+      <div style="{{ menuStyle }}">
+        <sc-for list="{{ sortOptions }}" as="o" hint-placeholder-count="4">
+          <button onClick="{{ o.onPick }}" style="{{ o.style }}">
+            <span>{{ o.label }}</span>
+            <span style="{{ o.tickStyle }}">◆</span>
+          </button>
+        </sc-for>
+      </div>
+    </div>
+  </div>
+
+  <!-- work grid (2-col) -->
+  <div data-m="pad" style="padding:40px;">
+    <div data-m="g1" style="display:grid;grid-template-columns:repeat(2,1fr);gap:32px;">
+      <sc-for list="{{ works }}" as="w" hint-placeholder-count="4">
+        <a href="{{ w.page }}" onMouseEnter="{{ w.onEnter }}" onMouseLeave="{{ w.onLeave }}" style="{{ w.dimStyle }}">
+          <div style="position:relative;aspect-ratio:3/2;background:#141414;border:1px solid #1f1f1f;overflow:hidden;">
+            <image-slot id="{{ w.slotId }}" shape="rect" fit="{{ w.fit }}" src="{{ w.img }}" placeholder="{{ w.ph }}" style="{{ w.slotStyle }}"></image-slot>
+            <span style="{{ w.badgeStyle }}">OPEN →</span>
+          </div>
+          <div style="padding-top:12px;">
+            <span style="display:block;font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:#8a857b;margin-bottom:7px;">{{ w.eyebrow }}</span>
+            <div data-m="sb" style="display:flex;justify-content:space-between;gap:16px;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;">
+              <span style="color:#f4f1ea;">{{ w.title }}</span>
+              <span style="color:#d70015;white-space:nowrap;">{{ w.role }} · NO. {{ w.no }}</span>
+            </div>
+          </div>
+        </a>
+      </sc-for>
+    </div>
+  </div>
+
+  <!-- footer -->
+  <div data-m="pad" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px;padding:34px 40px;border-top:1px solid #1f1f1f;">
+    <a href="mailto:andrewjcaso@gmail.com" style="font-family:'Archivo',sans-serif;font-weight:900;font-stretch:112%;text-transform:uppercase;font-size:clamp(20px,3vw,26px);letter-spacing:-0.02em;">andrewjcaso@gmail.com</a>
+    <div style="display:flex;gap:22px;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:#f4f1ea;">
+      <a href="https://www.instagram.com/andrewcaso/">Instagram</a>
+      <a href="https://www.linkedin.com/in/andrew-caso-229284204">LinkedIn</a>
+    </div>
+    <span style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.14em;color:#d70015;">© '26 K.SO<span style="color:#d70015;">*</span> — LOS ANGELES</span>
+  </div>
+
+
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { clock: '', openIdx: null, hover: null, sort: 'recent', sortOpen: false };
+  SORTS = [
+    { id: 'recent', label: 'Recent' },
+    { id: 'az',     label: 'A — Z' },
+    { id: 'newest', label: 'Year ↓ New–Old' },
+    { id: 'oldest', label: 'Year ↑ Old–New' },
+  ];
+  slug(t){return t.normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/\s*\/\s*/g,' ').replace(/[^A-Za-z0-9 ]/g,'').replace(/\s+/g,' ').trim();}
+
+  PROJECTS = [
+    { slotId: 'mv-23', year: 2026, no: '049', title: "Earnëd It", artist: "YEAT", page: "Project - Earned It.dc.html", img: "../stills/earned-it-cover.png" },
+    { slotId: 'mv-22', year: 2026, no: '048', title: "Speed Demon", artist: "LUCY BEDROQUE", page: "Project - Speed Demon.dc.html", img: "https://i.ytimg.com/vi/3_soAloXjEg/maxresdefault.jpg" },
+    { slotId: 'mv-14', year: 2025, no: '027', title: "Original", artist: "MALCOLM TODD", page: "Project - Original.dc.html", img: "https://i.ytimg.com/vi/YNfdJXbqru4/maxresdefault.jpg" },
+    { slotId: 'mv-15', year: 2026, no: '028', title: "Passenger", artist: "ALEX WARREN", page: "Project - Passenger.dc.html", img: "../stills/passenger-01.jpg" },
+    { slotId: 'mv-16', year: 2026, no: '029', title: "Talk On The Hill", artist: "WILLOW SMITH", page: "Project - Talk On The Hill.dc.html", img: "../stills/talk-on-the-hill-01.png" },
+    { slotId: 'mv-01', year: 2025, no: '030', title: "Money on Money", artist: "YOUNG THUG FT. FUTURE", page: "Project - Money on Money.dc.html", img: "https://images.squarespace-cdn.com/content/v1/6435e3fff1796c2d70570c03/048d5810-378c-462f-97a5-d611ae3c0333/Screenshot+2025-05-05+at+3.03.23%E2%80%AFAM.png?format=1000w" },
+    { slotId: 'mv-02', year: 2024, no: '031', title: "Mirada", artist: "IVAN CORNEJO", page: "Project - Mirada.dc.html", img: "https://images.squarespace-cdn.com/content/v1/6435e3fff1796c2d70570c03/ea3753ef-adc6-49ef-a7c1-bc52eb0d39ad/MIRADA_RC1_v2.00_03_07_21.Still027.jpg?format=1500w" },
+    { slotId: 'mv-03', crop: { ratio: 1.7794, l: 0.032, r: 0.032 }, year: 2024, no: '032', title: "Pushing It Down & Praying", artist: "LIZZY MCALPINE", page: "Project - Pushing It Down and Praying.dc.html", img: "https://images.squarespace-cdn.com/content/v1/6435e3fff1796c2d70570c03/10a25ec3-f532-4a01-8ae0-a35204681ae6/LizzyMcAlpine_PushingItDownAndPraying_OfficialVideo_Final_4k_PR422HQ.00_00_10_11.Still002.jpg?format=1000w" },
+    { slotId: 'mv-20', year: 2026, no: '033', title: "She's My Religion", artist: "WILLOW SMITH", page: "Project - She's My Religion.dc.html", img: "https://i.ytimg.com/vi/G99MeNCUwg0/maxresdefault.jpg" },
+    { slotId: 'mv-05', year: 2024, no: '034', title: "Nasty", artist: "TINASHE", page: "Project - Nasty.dc.html", img: "https://images.squarespace-cdn.com/content/v1/6435e3fff1796c2d70570c03/c6f3d437-c847-4c43-b6c9-6f864af1ff92/Screenshot+2024-09-29+at+7.07.40+PM.png?format=1000w" },
+    { slotId: 'mv-18', year: 2026, no: '035', title: "Difficult Love", artist: "MALCOLM TODD", page: "Project - Difficult Love.dc.html", img: "https://i.ytimg.com/vi/fgmc595rao4/maxresdefault.jpg" },
+    { slotId: 'mv-04', year: 2024, no: '036', title: "Weekend Drive", artist: "JABARI BANKS", page: "Project - Weekend Drive.dc.html", img: "https://images.squarespace-cdn.com/content/v1/6435e3fff1796c2d70570c03/b9e155c7-ff2b-4561-8399-3ad90fd500d5/Screenshot+2024-09-27+at+12.14.59%E2%80%AFPM.png?format=1000w" },
+    { slotId: 'mv-06', crop: { ratio: 1.7773, l: 0.096, r: 0.096 }, year: 2024, no: '037', title: "Motorcycle", artist: "REMI WOLF", page: "Project - Motorcycle.dc.html", img: "https://images.squarespace-cdn.com/content/v1/6435e3fff1796c2d70570c03/0a7dd41a-fb7f-45a1-af0a-5f71e742943f/Screenshot+2024-09-29+at+7.38.25+PM.png?format=1500w" },
+    { slotId: 'mv-17', year: 2026, no: '038', title: "100", artist: "ELLA MAI", page: "Project - 100.dc.html", img: "https://i.ytimg.com/vi/hTvp0Vgs42M/maxresdefault.jpg" },
+    { slotId: 'mv-19', crop: { ratio: 1.7778, l: 0.034, r: 0.096 }, year: 2026, no: '039', title: "I Saw Your Face", artist: "MALCOLM TODD", page: "Project - I Saw Your Face.dc.html", img: "https://i.ytimg.com/vi/3KQjOE1AuN4/maxresdefault.jpg" },
+    { slotId: 'mv-07', crop: { ratio: 1.5974, t: 0.054, b: 0.054 }, year: 2024, no: '040', title: "Eat Pray Love", artist: "PAUL RUSSELL", page: "Project - Eat Pray Love.dc.html", img: "https://images.squarespace-cdn.com/content/v1/6435e3fff1796c2d70570c03/10a75680-35ed-4d54-9c69-aa6f6574bda9/Screenshot+2024-09-27+at+12.39.05%E2%80%AFPM.png?format=1000w" },
+    { slotId: 'mv-08', year: 2024, no: '041', title: "Don't Let My Boyfriend Get in the Way", artist: "ALICE CHATER", page: "Project - Dont Let My Boyfriend Get in the Way.dc.html", img: "https://images.squarespace-cdn.com/content/v1/6435e3fff1796c2d70570c03/9a79eaa8-08bc-46f5-a54f-156e6cbc6019/Screenshot+2024-09-27+at+7.54.29+PM.png?format=1000w" },
+    { slotId: 'mv-09', year: 2024, no: '042', title: "Barry", artist: "AG CLUB", page: "Project - Barry.dc.html", img: "https://images.squarespace-cdn.com/content/v1/6435e3fff1796c2d70570c03/14b92d48-0247-48cd-b3bb-73d89821eed2/Screenshot+2024-09-29+at+6.19.56+PM.png?format=1000w" },
+    { slotId: 'mv-10', year: 2024, no: '043', title: "EVA", artist: "AG CLUB", page: "Project - EVA.dc.html", img: "https://images.squarespace-cdn.com/content/v1/6435e3fff1796c2d70570c03/30f4ef4e-fdb3-4182-b3ae-48e391b9d105/Sequence+18.00_01_28_13.Still003.JPG?format=1000w" },
+    { slotId: 'mv-11', crop: { ratio: 1.7794, t: 0.102, l: 0.096, r: 0.096 }, year: 2024, no: '044', title: "The Door", artist: "TEDDY SWIMS", page: "Project - The Door.dc.html", img: "https://images.squarespace-cdn.com/content/v1/6435e3fff1796c2d70570c03/0a55ebbe-e0a3-40a9-8ca5-a274c2f4d620/Screenshot+2024-09-29+at+6.48.05+PM.png?format=1000w" },
+    { slotId: 'mv-12', year: 2024, no: '045', title: "Getting No Sleep", artist: "TINASHE", page: "Project - Getting No Sleep.dc.html", img: "https://images.squarespace-cdn.com/content/v1/6435e3fff1796c2d70570c03/0cf90a4d-c333-4a71-8c9d-cacf6f33287b/Screenshot+2024-09-29+at+7.20.13+PM.png?format=1000w" },
+    { slotId: 'mv-13', year: 2023, no: '046', title: "Now I Know You", artist: "BENNETT COAST", page: "Project - Now I Know You.dc.html", img: "https://images.squarespace-cdn.com/content/v1/6435e3fff1796c2d70570c03/8f63f486-4df0-453d-a706-abb489805c95/Screen+Shot+2023-08-12+at+1.01.19+PM.PNG?format=1000w" },
+    { slotId: 'mv-21', year: 2026, no: '047', title: "Riptides", artist: "DEATH CAB FOR CUTIE", page: "Project - Riptides.dc.html", img: "https://i.ytimg.com/vi/YhruCF_beiA/maxresdefault.jpg" },
+  ];
+
+  componentDidMount() {
+    const p = (n) => String(n).padStart(2, '0');
+    const tick = () => { const d = new Date(); this.setState({ clock: `${p(d.getHours())}:${p(d.getMinutes())}:${p(d.getSeconds())}` }); };
+    tick();
+    this._t = setInterval(tick, 1000);
+    this._key = (e) => {
+      if (this.state.openIdx === null) return;
+      if (e.key === 'Escape') this.setState({ openIdx: null });
+      else if (e.key === 'ArrowLeft') this.step(-1);
+      else if (e.key === 'ArrowRight') this.step(1);
+    };
+    window.addEventListener('keydown', this._key);
+    this._away = () => { if (this.state.sortOpen) this.setState({ sortOpen: false }); };
+    window.addEventListener('pointerdown', this._away);
+  }
+  componentWillUnmount() { clearInterval(this._t); window.removeEventListener('keydown', this._key); window.removeEventListener('pointerdown', this._away); }
+
+  sorted() {
+    const rows = this.PROJECTS.map((p, i) => ({ p, i }));
+    const yr = (r) => (typeof r.p.year === 'number' ? r.p.year : null);
+    if (this.state.sort === 'az') {
+      rows.sort((a, b) => a.p.title.localeCompare(b.p.title, 'en', { sensitivity: 'base' }));
+    } else if (this.state.sort === 'newest' || this.state.sort === 'oldest') {
+      const dir = this.state.sort === 'newest' ? -1 : 1;
+      rows.sort((a, b) => {
+        const ya = yr(a), yb = yr(b);
+        if (ya === null && yb === null) return a.i - b.i;
+        if (ya === null) return 1;
+        if (yb === null) return -1;
+        return (ya - yb) * dir || a.i - b.i;
+      });
+    }
+    return rows.map((r) => r.p);
+  }
+
+  step(dir) { const n = this.PROJECTS.length; this.setState((s) => ({ openIdx: (s.openIdx + dir + n) % n })); }
+
+  renderVals() {
+    const hover = this.state.hover;
+    // eyebrow: the artist line — em dash where the title already says it (site convention)
+    const norm = (s) => (s || '').toLowerCase().replace(/[^a-z0-9]/g, '');
+    const eyebrowFor = (p) => {
+      const a = p.eyebrow || p.artist;
+      return a && !norm(p.title).includes(norm(a)) ? a : '—';
+    };
+    const open = this.state.sortOpen;
+    // crop: fraction of the source that is baked-in black bar (screen-grabbed covers).
+    // fit=fill + an oversized, offset box makes the bars fall outside the 3:2 frame.
+    const framed = (p) => {
+      const c = p.crop;
+      if (!c) return { fit: 'cover', slotStyle: 'width:100%;height:100%;display:block;pointer-events:none;' };
+      const Rf = 1.5, l = c.l || 0, r = c.r || 0, t = c.t || 0, b = c.b || 0, Rn = c.ratio;
+      const kx = 1 - l - r, ky = 1 - t - b, Rc = Rn * kx / ky;
+      let dW, dH, left, top;
+      if (Rc >= Rf) {
+        dH = 100 / ky; dW = 100 * Rn / (Rf * ky);
+        left = -(l * dW) - (Rc / Rf - 1) * 50; top = -(t * dH);
+      } else {
+        dW = 100 / kx; dH = 100 * Rf / (Rn * kx);
+        left = -(l * dW); top = -(t * dH) - (Rf * ky / (Rn * kx) - 1) * 50;
+      }
+      return { fit: 'fill', slotStyle: `position:absolute;width:${dW.toFixed(3)}%;height:${dH.toFixed(3)}%;left:${left.toFixed(3)}%;top:${top.toFixed(3)}%;display:block;pointer-events:none;` };
+    };
+    const works = this.sorted().map((p, i) => ({
+      ...framed(p),
+      slotId: p.slotId, no: p.no, title: p.title, artist: p.artist, eyebrow: eyebrowFor(p), role: p.role || 'Prod Design', page: p.page, img: p.img, ph: `${p.title} — drop image`,
+      dimStyle: { opacity: hover !== null && hover !== i ? 0.35 : 1, transition: 'opacity 260ms cubic-bezier(0.2,0.7,0.2,1)', cursor: 'pointer', display: 'block', color: '#f4f1ea', textDecoration: 'none' },
+      badgeStyle: `position:absolute;left:14px;bottom:14px;font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.16em;color:#f4f1ea;background:#d70015;padding:5px 9px;opacity:${hover === i ? 1 : 0};transition:opacity 200ms cubic-bezier(0.2,0.7,0.2,1);`,
+      onEnter: () => this.setState({ hover: i }),
+      onLeave: () => this.setState({ hover: null }),
+      onOpen: () => this.setState({ openIdx: i }),
+    }));
+    const idx = this.state.openIdx;
+    const active = idx !== null ? this.PROJECTS[idx] : {};
+    const current = this.SORTS.find((s) => s.id === this.state.sort) || this.SORTS[0];
+    return {
+      clock: this.state.clock,
+      works,
+      sortLabel: current.label,
+      onToggleSort: (e) => { e.stopPropagation(); this.setState({ sortOpen: !open }); },
+      caretStyle: `display:inline-block;transition:transform 180ms cubic-bezier(0.2,0.7,0.2,1);transform:rotate(${open ? 180 : 0}deg);`,
+      menuStyle: {
+        position: 'absolute', top: 'calc(100% + 14px)', right: 0, zIndex: 30, minWidth: '208px',
+        display: 'flex', flexDirection: 'column', background: '#0a0a0a', border: '1px solid #1f1f1f',
+        opacity: open ? 1 : 0, visibility: open ? 'visible' : 'hidden',
+        transform: open ? 'translateY(0)' : 'translateY(-4px)',
+        transition: 'opacity 160ms cubic-bezier(0.2,0.7,0.2,1), transform 160ms cubic-bezier(0.2,0.7,0.2,1), visibility 160ms',
+      },
+      sortOptions: this.SORTS.map((s) => {
+        const on = s.id === this.state.sort;
+        return {
+          label: s.label,
+          style: `appearance:none;background:none;border:0;border-bottom:1px solid #1f1f1f;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:12px 14px;text-align:left;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:${on ? '#d70015' : '#f4f1ea'};`,
+          tickStyle: `font-size:8px;color:#d70015;opacity:${on ? 1 : 0};`,
+          onPick: (e) => { e.stopPropagation(); this.setState({ sort: s.id, sortOpen: false, hover: null }); },
+        };
+      }),
+      shownStr: `Showing ${String(this.PROJECTS.length).padStart(2, '0')} — Music Videos`,
+      detailOpen: idx !== null,
+      active,
+      activePos: idx !== null ? String(idx + 1).padStart(2, '0') : '00',
+      activeTotal: String(this.PROJECTS.length).padStart(2, '0'),
+      onClose: () => this.setState({ openIdx: null }),
+      onPrev: () => this.step(-1),
+      onNext: () => this.step(1),
+      stop: (e) => e.stopPropagation(),
+    };
+  }
+}
+</script>
+</body>
+</html>

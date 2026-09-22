@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="../support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&amp;family=Space+Mono:ital,wght@0,400;0,700;1,400&amp;family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300&amp;display=swap" rel="stylesheet">
+<script src="../image-slot.js"></script>
+<script src="https://player.vimeo.com/api/player.js"></script>
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: #0a0a0a; }
+  a { color: #f4f1ea; text-decoration: none; }
+  a:hover { color: #d70015; }
+
+  /* phone layout (<=720px) — desktop untouched */
+  @media (max-width: 720px) {
+    [data-m~="pad"] { padding-left: 20px !important; padding-right: 20px !important; }
+    [data-m~="cl"] { left: 20px !important; }
+    [data-m~="cr"] { right: 20px !important; }
+    [data-m~="nav"] { flex-wrap: wrap !important; gap: 14px 20px !important; padding-top: 16px !important; padding-bottom: 16px !important; }
+    [data-m~="navlinks"] { flex-wrap: wrap !important; gap: 10px 16px !important; width: 100% !important; font-size: 10px !important; }
+    [data-m~="sb"] { flex-wrap: wrap !important; gap: 6px 16px !important; }
+    [data-m~="sb"] > * { white-space: normal !important; }
+    [data-m~="stack"] { grid-template-columns: minmax(0,1fr) !important; }
+    [data-m~="stack"] > div:empty { display: none !important; }
+    [data-m~="nbr"] { border-right: 0 !important; border-bottom: 1px solid #1f1f1f !important; }
+    [data-m~="ph"] { min-height: 0 !important; height: auto !important; }
+    [data-m~="g1"] { grid-template-columns: minmax(0,1fr) !important; }
+    [data-m~="g2"] { grid-template-columns: repeat(2, minmax(0,1fr)) !important; gap: 10px !important; }
+    [data-m~="clients"] { grid-template-columns: repeat(2, minmax(0,1fr)) !important; }
+    [data-m~="pn"] > a > span:last-child { font-size: 16px !important; }
+    [data-m~="frames"] { gap: 56px !important; padding-top: 48px !important; padding-bottom: 56px !important; }
+    [data-reveal-block] { grid-template-columns: minmax(0,1fr) !important; width: 100% !important; gap: 12px !important; justify-content: stretch !important; }
+    [data-reveal-block] > * { grid-column: auto !important; }
+    [data-reveal-block] > [data-reveal="cap"]:first-child, [data-reveal-block] > :first-child:has([data-reveal="cap"]) { order: 2; padding-bottom: 0 !important; }
+    [data-m~="hide"], pre[aria-hidden] { display: none !important; }
+    [data-m~="work"] { padding-bottom: 120px !important; }
+    h1 { overflow-wrap: anywhere; }
+  }
+</style>
+</helmet>
+
+<div style="background:#0a0a0a;color:#f4f1ea;font-family:'Archivo',sans-serif;min-height:100vh;">
+
+  <div data-m="nav pad" style="display:flex;justify-content:space-between;align-items:center;padding:22px 40px;border-bottom:1px solid #1f1f1f;">
+    <a href="../Andrew Caso Landing - Combined.dc.html" style="display:flex;align-items:center;gap:12px;">
+      <img src="../assets/logo-mark.png" alt="" style="width:34px;height:34px;object-fit:contain;">
+      <span style="font-family:'Archivo',sans-serif;font-weight:900;font-stretch:112%;font-size:20px;letter-spacing:-0.02em;text-transform:uppercase;">K.SO<span style="color:#d70015;">*</span></span>
+    </a>
+    <div data-m="navlinks" style="display:flex;gap:26px;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:#f4f1ea;">
+      <a href="../Andrew Caso Landing - Combined.dc.html">Home</a>
+      <a href="Commercial.dc.html" style="color:#d70015;">Commercial</a>
+      <a href="../Photoshoot/Photoshoot.dc.html">Photoshoot</a>
+      <a href="../Music Videos/Music Videos.dc.html">Music Videos</a>
+      <a href="../Creative Direction/Creative Direction.dc.html">Creative Direction</a>
+      <a href="../Contact.dc.html">Contact</a>
+    </div>
+  </div>
+
+  <div data-m="pad" style="position:relative;padding:34px 40px 30px;border-bottom:1px solid #1f1f1f;">
+    <div style="display:flex;justify-content:space-between;align-items:center;">
+      <a href="Commercial.dc.html" style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:#f4f1ea;">← Commercial</a>
+      <span style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.18em;color:#d70015;">{{ clock }}</span>
+    </div>
+  </div>
+
+  <div data-m="pad" style="padding:56px 40px 36px;">
+    <span style="display:block;font-family:'Space Mono',monospace;font-size:12px;letter-spacing:0.2em;text-transform:uppercase;color:#d70015;margin-bottom:20px;">Bandit Running</span>
+    <h1 style="font-family:'Archivo',sans-serif;font-weight:900;font-stretch:112%;text-transform:uppercase;font-size:clamp(44px,8vw,104px);line-height:0.86;letter-spacing:-0.04em;margin:0;">LA Marathon 2026<span style="color:#d70015;">.</span></h1>
+  </div>
+
+  <div data-m="pad" style="padding:0 40px 8px;">
+    <div ref="{{ playerWrapRef }}" onMouseEnter="{{ playerEnter }}" onMouseLeave="{{ playerLeave }}" style="position:relative;aspect-ratio:16/9;background:#000;border:1px solid #1f1f1f;overflow:hidden;">
+      <iframe ref="{{ iframeRef }}" src="https://player.vimeo.com/video/1218443672?background=1&amp;dnt=1" title="LA Marathon 2026 — film" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen="allowfullscreen" style="position:absolute;inset:0;width:100%;height:100%;border:0;pointer-events:none;"></iframe>
+      <sc-if value="{{ showPoster }}" hint-placeholder-val="{{ true }}">
+        <img src="../stills/la-marathon-04.jpg" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;">
+      </sc-if>
+      <!-- click layer / big play -->
+      <div onClick="{{ togglePlay }}" style="position:absolute;inset:0;cursor:pointer;">
+        <sc-if value="{{ showBigPlay }}" hint-placeholder-val="{{ true }}">
+          <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(10,10,10,0.35);">
+            <span style="display:flex;align-items:center;gap:12px;font-family:'Space Mono',monospace;font-size:12px;letter-spacing:0.2em;text-transform:uppercase;color:#f4f1ea;border:1px solid #f4f1ea;padding:16px 28px;background:rgba(10,10,10,0.6);transition:all 120ms cubic-bezier(0.2,0.7,0.2,1);" style-hover="background:#d70015;border-color:#d70015;">▶&nbsp; {{ bigPlayLabel }}</span>
+          </div>
+        </sc-if>
+      </div>
+      <!-- custom control bar -->
+      <div style="{{ barStyle }}">
+        <button onClick="{{ togglePlay }}" style="appearance:none;background:none;border:0;cursor:pointer;color:#f4f1ea;font-family:'Space Mono',monospace;font-size:12px;letter-spacing:0.1em;padding:0;width:28px;text-align:left;">{{ playGlyph }}</button>
+        <div onClick="{{ seek }}" style="position:relative;flex:1;height:18px;display:flex;align-items:center;cursor:pointer;">
+          <div style="position:absolute;left:0;right:0;height:2px;background:#2a2a2a;"></div>
+          <div style="{{ progressStyle }}"></div>
+        </div>
+        <span style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.12em;color:#b8b3a7;white-space:nowrap;">{{ timecode }}</span>
+        <button onClick="{{ toggleMute }}" style="appearance:none;background:none;border:0;cursor:pointer;color:#f4f1ea;font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;padding:0;">{{ muteLabel }}</button>
+        <button onClick="{{ toggleFull }}" style="appearance:none;background:none;border:0;cursor:pointer;color:#f4f1ea;font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;padding:0;">Full ⛶</button>
+      </div>
+    </div>
+  </div>
+
+  <div data-m="stack" style="display:grid;grid-template-columns:0.42fr 0.58fr;gap:1px;background:#1f1f1f;border-top:1px solid #1f1f1f;border-bottom:1px solid #1f1f1f;margin-top:40px;">
+    <div data-m="pad" style="background:#0a0a0a;padding:40px;min-width:0;">
+      <div style="display:grid;grid-template-columns:auto 1fr;gap:14px 20px;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;">
+        <span style="color:#d70015;">Year</span><span style="color:#f4f1ea;">'26</span>
+        <span style="color:#d70015;">Role</span><span style="color:#f4f1ea;">Production Designer</span>
+        <span style="color:#d70015;">Client</span><span style="color:#f4f1ea;">Bandit Running</span>
+        <span style="color:#d70015;">Production Company</span><span style="color:#f4f1ea;">Bandit Running</span>
+        <span style="color:#d70015;">Director</span><span style="color:#f4f1ea;">Henry Kornaros</span>
+      </div>
+    </div>
+    <div data-m="pad" style="background:#0a0a0a;padding:40px;min-width:0;">
+      <span style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;color:#d70015;">Notes</span>
+      <p style="font-size:16px;line-height:1.7;color:#f4f1ea;margin:18px 0 0;max-width:520px;">Berlin Commercial Shortlist Finalist '26.</p>
+    </div>
+  </div>
+
+  <div data-m="pad" style="padding:48px 40px 64px;">
+    <div data-m="sb" style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:20px;">
+      <span style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;color:#f4f1ea;">Stills / Gallery</span>
+      <span style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#d70015;">NO. 003</span>
+    </div>
+    <div data-m="g2" style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;">
+        <div style="position:relative;aspect-ratio:4/3;background:#141414;border:1px solid #1f1f1f;">
+          <image-slot id="com-marathon-g1" shape="rect" src="../stills/la-marathon-01.jpg" placeholder="Still 01" style="width:100%;height:100%;display:block;"></image-slot>
+        </div>
+        <div style="position:relative;aspect-ratio:4/3;background:#141414;border:1px solid #1f1f1f;">
+          <image-slot id="com-marathon-g2" shape="rect" src="../stills/la-marathon-02.jpg" placeholder="Still 02" style="width:100%;height:100%;display:block;"></image-slot>
+        </div>
+        <div style="position:relative;aspect-ratio:4/3;background:#141414;border:1px solid #1f1f1f;">
+          <image-slot id="com-marathon-g3" shape="rect" src="../stills/la-marathon-03.jpg" placeholder="Still 03" style="width:100%;height:100%;display:block;"></image-slot>
+        </div>
+        <div style="position:relative;aspect-ratio:4/3;background:#141414;border:1px solid #1f1f1f;">
+          <image-slot id="com-marathon-g4" shape="rect" src="../stills/la-marathon-04.jpg" placeholder="Still 04" style="width:100%;height:100%;display:block;"></image-slot>
+        </div>
+        <div style="position:relative;aspect-ratio:4/3;background:#141414;border:1px solid #1f1f1f;">
+          <image-slot id="com-marathon-g5" shape="rect" src="../stills/la-marathon-05.jpg" placeholder="Still 05" style="width:100%;height:100%;display:block;"></image-slot>
+        </div>
+        <div style="position:relative;aspect-ratio:4/3;background:#141414;border:1px solid #1f1f1f;">
+          <image-slot id="com-marathon-g6" shape="rect" src="../stills/la-marathon-06.jpg" placeholder="Still 06" style="width:100%;height:100%;display:block;"></image-slot>
+        </div>
+    </div>
+  </div>
+
+  <div data-m="pn" style="display:grid;grid-template-columns:1fr 1fr;gap:1px;background:#1f1f1f;border-top:1px solid #1f1f1f;border-bottom:1px solid #1f1f1f;">
+    <a href="Project - No Sweat.dc.html" data-m="pad" style="background:#0a0a0a;padding:30px 40px;display:block;">
+      <span style="display:block;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:#d70015;margin-bottom:8px;">← Prev</span>
+      <span style="font-family:'Archivo',sans-serif;font-weight:900;font-stretch:112%;text-transform:uppercase;font-size:22px;letter-spacing:-0.02em;color:#f4f1ea;">No Sweat</span>
+    </a>
+    <a href="Project - Blood Orange Cactus Water.dc.html" data-m="pad" style="background:#0a0a0a;padding:30px 40px;display:block;text-align:right;">
+      <span style="display:block;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:#d70015;margin-bottom:8px;">Next →</span>
+      <span style="font-family:'Archivo',sans-serif;font-weight:900;font-stretch:112%;text-transform:uppercase;font-size:22px;letter-spacing:-0.02em;color:#f4f1ea;">Blood Orange Cactus Water</span>
+    </a>
+  </div>
+
+  <div data-m="pad" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px;padding:34px 40px;">
+    <a href="mailto:andrewjcaso@gmail.com" style="font-family:'Archivo',sans-serif;font-weight:900;font-stretch:112%;text-transform:uppercase;font-size:clamp(20px,3vw,26px);letter-spacing:-0.02em;">andrewjcaso@gmail.com</a>
+    <div style="display:flex;gap:22px;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:#f4f1ea;">
+      <a href="https://www.instagram.com/andrewcaso/">Instagram</a>
+      <a href="https://www.linkedin.com/in/andrew-caso-229284204">LinkedIn</a>
+    </div>
+    <span style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.14em;color:#d70015;">© '26 K.SO<span style="color:#d70015;">*</span> — LOS ANGELES</span>
+  </div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { clock: '', playing: false, started: false, muted: true, current: 0, duration: 0, hoverPlayer: false };
+  _wrapRef = React.createRef();
+  _iframeRef = React.createRef();
+
+  componentDidMount() {
+    const p = (n) => String(n).padStart(2, '0');
+    const tick = () => { const d = new Date(); this.setState({ clock: p(d.getHours())+':'+p(d.getMinutes())+':'+p(d.getSeconds()) }); };
+    tick();
+    this._t = setInterval(tick, 1000);
+
+    const init = () => {
+      if (!window.Vimeo || !this._iframeRef.current) { setTimeout(init, 200); return; }
+      const pl = new Vimeo.Player(this._iframeRef.current);
+      this._pl = pl;
+      // background=1 autoplays muted — hold it at the first frame until Play
+      pl.ready().then(() => { pl.pause(); pl.setCurrentTime(0); });
+      pl.getDuration().then((d) => this.setState({ duration: d }));
+      pl.on('timeupdate', (e) => this.setState({ current: e.seconds, duration: e.duration }));
+      pl.on('play', () => this.setState({ playing: true }));
+      pl.on('pause', () => this.setState({ playing: false }));
+      pl.on('ended', () => this.setState({ playing: false, started: false, current: 0 }));
+    };
+    init();
+  }
+  componentWillUnmount() { clearInterval(this._t); if (this._pl) this._pl.destroy(); }
+
+  _fmt(s) {
+    s = Math.max(0, Math.floor(s || 0));
+    return Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0');
+  }
+
+  renderVals() {
+    const st = this.state;
+    return {
+      clock: st.clock,
+      playerWrapRef: this._wrapRef,
+      iframeRef: this._iframeRef,
+      showBigPlay: !st.started,
+      showPoster: !st.started,
+      playerEnter: () => this.setState({ hoverPlayer: true }),
+      playerLeave: () => this.setState({ hoverPlayer: false }),
+      bigPlayLabel: 'Play',
+      playGlyph: st.playing ? '❚❚' : '▶',
+      muteLabel: st.muted ? 'Sound off' : 'Sound on',
+      timecode: this._fmt(st.current) + ' / ' + this._fmt(st.duration),
+      barStyle: {
+        position: 'absolute', left: 0, right: 0, bottom: 0, zIndex: 2,
+        display: 'flex', alignItems: 'center', gap: '16px',
+        padding: '12px 16px', background: 'rgba(10,10,10,0.72)',
+        borderTop: '1px solid #1f1f1f', backdropFilter: 'blur(12px)',
+        opacity: st.started && st.hoverPlayer ? 1 : 0, pointerEvents: st.started && st.hoverPlayer ? 'auto' : 'none',
+        transition: 'opacity 200ms cubic-bezier(0.2,0.7,0.2,1)',
+      },
+      progressStyle: {
+        position: 'absolute', left: 0, height: '2px', background: '#d70015',
+        width: (st.duration ? (st.current / st.duration) * 100 : 0) + '%',
+      },
+      togglePlay: () => {
+        if (!this._pl) return;
+        if (this.state.playing) { this._pl.pause(); }
+        else {
+          // first play: unmute — background mode starts muted
+          if (!this.state.started) { this._pl.setMuted(false); this.setState({ muted: false, started: true }); }
+          this._pl.play();
+        }
+      },
+      seek: (e) => {
+        if (!this._pl || !this.state.duration) return;
+        e.stopPropagation();
+        const r = e.currentTarget.getBoundingClientRect();
+        const frac = Math.min(1, Math.max(0, (e.clientX - r.left) / r.width));
+        this._pl.setCurrentTime(frac * this.state.duration);
+      },
+      toggleMute: (e) => {
+        e.stopPropagation();
+        if (!this._pl) return;
+        const m = !this.state.muted;
+        this._pl.setMuted(m);
+        this.setState({ muted: m });
+      },
+      toggleFull: (e) => {
+        e.stopPropagation();
+        const el = this._wrapRef.current;
+        if (!el) return;
+        if (document.fullscreenElement) document.exitFullscreen();
+        else if (el.requestFullscreen) el.requestFullscreen();
+      },
+    };
+  }
+}
+</script>
+</body>
+</html>
