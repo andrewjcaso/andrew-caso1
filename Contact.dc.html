@@ -187,7 +187,7 @@ class Component extends DCLogic {
       sending: this.state.sending,
       error: this.state.error,
       btnLabel: this.state.sending ? 'Sending…' : 'Send enquiry →',
-      sentMsg: this.state.sentMsg || "Thanks — your enquiry is on its way to andrewjcaso@gmail.com. I'll reply shortly.",
+      sentMsg: this.state.sentMsg || "Thank you for reaching out, Excited to hear about your project. Ill reply shortly!",
       onSend: async () => {
         const { name, email, ptype, msg, sending } = this.state;
         if (sending) return;
