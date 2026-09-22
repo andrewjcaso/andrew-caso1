@@ -139,6 +139,13 @@
             <label style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:#d70015;">Message</label>
             <textarea value="{{ msg }}" onInput="{{ onMsg }}" rows="5" placeholder="Dates, scope, references…" style="background:#0a0a0a;border:1px solid #2a2a2a;color:#f4f1ea;padding:13px 14px;font-size:15px;border-radius:0;resize:vertical;"></textarea>
           </div>
+          <div style="display:flex;flex-direction:column;gap:8px;">
+            <label style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:#d70015;">Attachment</label>
+            <a href="https://www.dropbox.com/request/7n64dp7p4nydmk29bje9" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:14px;background:#0a0a0a;border:1px solid #2a2a2a;padding:11px 14px;cursor:pointer;text-decoration:none;" style-hover="border-color:#d70015;">
+              <span style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#f4f1ea;border:1px solid #2a2a2a;padding:7px 13px;">Attach files →</span>
+              <span style="font-size:14px;color:#6b675f;">Decks, reels, references — any size. Opens a secure Dropbox upload.</span>
+            </a>
+          </div>
           <button onClick="{{ onSend }}" disabled="{{ sending }}" style="align-self:flex-start;font-family:'Space Mono',monospace;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;color:#f4f1ea;background:#0a0a0a;border:1px solid #2a2a2a;padding:15px 30px;cursor:pointer;transition:all 120ms cubic-bezier(0.2,0.7,0.2,1);" style-hover="background:#d70015;border-color:#d70015;">{{ btnLabel }}</button>
           <sc-if value="{{ error }}" hint-placeholder-val="{{ false }}">
             <span style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:#d70015;">{{ error }}</span>
