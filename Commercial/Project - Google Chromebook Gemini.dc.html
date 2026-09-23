@@ -88,16 +88,15 @@
 
   <div data-m="pad" style="padding:0 40px 8px;">
     <div ref="{{ playerWrapRef }}" onMouseEnter="{{ playerEnter }}" onMouseLeave="{{ playerLeave }}" style="position:relative;aspect-ratio:16/9;background:#000;border:1px solid #1f1f1f;overflow:hidden;">
-      <iframe ref="{{ iframeRef }}" src="https://player.vimeo.com/video/1218427775?background=1&amp;dnt=1" title="Chromebook + Gemini — film" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen="allowfullscreen" style="position:absolute;inset:0;width:100%;height:100%;border:0;pointer-events:none;"></iframe>
+      <iframe ref="{{ iframeRef }}" src="https://player.vimeo.com/video/1218427775?background=1&amp;autoplay=0&amp;dnt=1" title="Chromebook + Gemini — film" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen="allowfullscreen" style="position:absolute;inset:0;width:100%;height:100%;border:0;pointer-events:none;"></iframe>
       <sc-if value="{{ showPoster }}" hint-placeholder-val="{{ true }}">
         <img src="https://images.squarespace-cdn.com/content/v1/6435e3fff1796c2d70570c03/0318c1b8-2667-49bb-9e28-e75bc8cec4ab/Screenshot+2025-01-23+at+3.27.45+PM.png?format=1500w" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;">
       </sc-if>
+      <div style="{{ veilFade }}"></div>
       <div onClick="{{ togglePlay }}" style="position:absolute;inset:0;cursor:pointer;">
-        <sc-if value="{{ showBigPlay }}" hint-placeholder-val="{{ true }}">
-          <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(10,10,10,0.35);">
+        <div style="{{ playFade }}"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(10,10,10,0.35);">
             <span style="display:flex;align-items:center;gap:12px;font-family:'Gudea',sans-serif;font-size:12px;letter-spacing:0.2em;text-transform:uppercase;color:#f4f1ea;border:1px solid #f4f1ea;padding:16px 28px;background:rgba(10,10,10,0.6);transition:all 120ms cubic-bezier(0.2,0.7,0.2,1);" style-hover="background:#d70015;border-color:#d70015;">▶&nbsp; {{ bigPlayLabel }}</span>
-          </div>
-        </sc-if>
+          </div></div>
       </div>
       <div style="{{ barStyle }}">
         <button onClick="{{ togglePlay }}" style="appearance:none;background:none;border:0;cursor:pointer;color:#f4f1ea;font-family:'Gudea',sans-serif;font-size:12px;letter-spacing:0.1em;padding:0;width:28px;text-align:left;">{{ playGlyph }}</button>
@@ -176,7 +175,7 @@
 </x-dc>
 <script type="text/x-dc" data-dc-script>
 class Component extends DCLogic {
-  state = { clock: '', playing: false, started: false, muted: true, current: 0, duration: 0, hoverPlayer: false };
+  state = { clock: '', playing: false, started: false, muted: true, current: 0, duration: 0, hoverPlayer: false, held: false };
   _wrapRef = React.createRef();
   _iframeRef = React.createRef();
 
@@ -191,10 +190,13 @@ class Component extends DCLogic {
       const pl = new Vimeo.Player(this._iframeRef.current);
       this._pl = pl;
       // background=1 autoplays muted — hold it at the first frame until Play
-      pl.ready().then(() => { pl.pause(); pl.setCurrentTime(0); });
+      const hold = () => { if (!this._userStarted) { pl.pause(); pl.setCurrentTime(0); } };
+      pl.ready().then(() => { hold(); setTimeout(() => this.setState({ held: true }), 350); });
+      setTimeout(() => this.setState({ held: true }), 3000);
+      pl.on('loaded', hold);
       pl.getDuration().then((d) => this.setState({ duration: d }));
-      pl.on('timeupdate', (e) => this.setState({ current: e.seconds, duration: e.duration }));
-      pl.on('play', () => this.setState({ playing: true }));
+      pl.on('timeupdate', (e) => { if (!this._userStarted) { hold(); return; } this.setState({ current: e.seconds, duration: e.duration }); });
+      pl.on('play', () => { if (!this._userStarted) { hold(); return; } this.setState({ playing: true }); });
       pl.on('pause', () => this.setState({ playing: false }));
       pl.on('ended', () => this.setState({ playing: false, started: false, current: 0 }));
     };
@@ -214,6 +216,8 @@ class Component extends DCLogic {
       playerWrapRef: this._wrapRef,
       iframeRef: this._iframeRef,
       showBigPlay: !st.started,
+      playFade: { position: 'absolute', inset: 0, pointerEvents: st.started ? 'none' : 'auto', opacity: st.started ? 0 : 1, transition: 'opacity 600ms cubic-bezier(0.2,0.6,0.2,1)' },
+      veilFade: { position: 'absolute', inset: 0, background: '#000', pointerEvents: 'none', opacity: st.held || st.started ? 0 : 1, transition: 'opacity 900ms cubic-bezier(0.2,0.6,0.2,1)' },
       showPoster: !st.started,
       playerEnter: () => this.setState({ hoverPlayer: true }),
       playerLeave: () => this.setState({ hoverPlayer: false }),
@@ -237,7 +241,7 @@ class Component extends DCLogic {
         if (!this._pl) return;
         if (this.state.playing) { this._pl.pause(); }
         else {
-          // first play: unmute — background mode starts muted
+          this._userStarted = true;
           if (!this.state.started) { this._pl.setMuted(false); this.setState({ muted: false, started: true }); }
           this._pl.play();
         }

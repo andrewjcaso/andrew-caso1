@@ -87,18 +87,22 @@
   </div>
 
   <div data-m="pad" style="padding:0 40px 8px;">
-    <div ref="{{ playerWrapRef }}" onMouseEnter="{{ playerEnter }}" onMouseLeave="{{ playerLeave }}" style="position:relative;aspect-ratio:16/9;background:#000;border:1px solid #1f1f1f;overflow:hidden;">
+    <div ref="{{ playerWrapRef }}" onMouseEnter="{{ playerEnter }}" onMouseMove="{{ playerEnter }}" onMouseLeave="{{ playerLeave }}" style="position:relative;aspect-ratio:16/9;background:#000;border:1px solid #1f1f1f;overflow:hidden;">
       <div ref="{{ mountRef }}" style="position:absolute;inset:0;"></div>
       <sc-if value="{{ showPoster }}" hint-placeholder-val="{{ true }}">
-        <div style="position:absolute;inset:0;background:url('stills/frostys-motel-01.jpg') center / cover no-repeat;"></div>
+        <div style="position:absolute;inset:0;background:#141414;">
+          <image-slot id="c-frostys-motel-poster" shape="rect" src="../stills/frostys-motel-01.jpg" placeholder="Drop poster / key still" style="width:100%;height:100%;display:block;color:rgba(244,241,234,0.55);"></image-slot>
+        </div>
       </sc-if>
-      <div onClick="{{ togglePlay }}" style="position:absolute;inset:0;cursor:pointer;">
-        <sc-if value="{{ showBigPlay }}" hint-placeholder-val="{{ true }}">
-          <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(10,10,10,0.35);">
-            <span style="display:flex;align-items:center;gap:12px;font-family:'Gudea',sans-serif;font-size:12px;letter-spacing:0.2em;text-transform:uppercase;color:#f4f1ea;border:1px solid #f4f1ea;padding:16px 28px;background:rgba(10,10,10,0.6);transition:all 120ms cubic-bezier(0.2,0.7,0.2,1);" style-hover="background:#d70015;border-color:#d70015;">▶&nbsp; Play</span>
-          </div>
-        </sc-if>
-      </div>
+      <sc-if value="{{ hasVid }}" hint-placeholder-val="{{ true }}">
+        <div onClick="{{ togglePlay }}" style="position:absolute;inset:0;cursor:pointer;">
+          <sc-if value="{{ showBigPlay }}" hint-placeholder-val="{{ true }}">
+            <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(10,10,10,0.35);">
+              <span style="display:flex;align-items:center;gap:12px;font-family:'Gudea',sans-serif;font-size:12px;letter-spacing:0.2em;text-transform:uppercase;color:#f4f1ea;border:1px solid #f4f1ea;padding:16px 28px;background:rgba(10,10,10,0.6);transition:all 120ms cubic-bezier(0.2,0.7,0.2,1);" style-hover="background:#d70015;border-color:#d70015;">▶&nbsp; Play</span>
+            </div>
+          </sc-if>
+        </div>
+      </sc-if>
       <div style="{{ barStyle }}">
         <button onClick="{{ togglePlay }}" style="appearance:none;background:none;border:0;cursor:pointer;color:#f4f1ea;font-family:'Gudea',sans-serif;font-size:12px;letter-spacing:0.1em;padding:0;width:28px;text-align:left;">{{ playGlyph }}</button>
         <div onClick="{{ seek }}" style="position:relative;flex:1;height:18px;display:flex;align-items:center;cursor:pointer;">
@@ -174,37 +178,50 @@
 
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script>
+<script type="text/x-dc" data-dc-script data-props="{&quot;videoId&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;U7WpnYAKyEk&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Film&quot;},&quot;showNotes&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Sections&quot;},&quot;showGallery&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Sections&quot;}}">
 class Component extends DCLogic {
   state = { clock: '', playing: false, started: false, muted: false, current: 0, duration: 0, hoverPlayer: false };
   _wrapRef = React.createRef();
   _mountRef = React.createRef();
+  vid() { return (this.props.videoId || 'U7WpnYAKyEk').trim(); }
   componentDidMount() {
     const p = (n) => String(n).padStart(2, '0');
     const tick = () => { const d = new Date(); this.setState({ clock: p(d.getHours())+':'+p(d.getMinutes())+':'+p(d.getSeconds()) }); };
     tick(); this._t = setInterval(tick, 1000);
+    if (this.vid()) this.mountPlayer();
+  }
+  componentDidUpdate(prev) {
+    // swapping the videoId tweak rebuilds the player in place
+    if ((prev.videoId || '') === (this.props.videoId || '')) return;
+    if (this._pl && this._pl.destroy) { this._pl.destroy(); this._pl = null; }
+    if (this._mountRef.current) this._mountRef.current.innerHTML = '';
+    this.setState({ playing: false, started: false, current: 0, duration: 0 });
+    if (this.vid()) this.mountPlayer();
+  }
+  mountPlayer() {
     const init = () => {
       const mount = this._mountRef.current;
+      if (!this.vid()) return;
       if (!window.YT || !window.YT.Player || !mount) { setTimeout(init, 200); return; }
       const host = document.createElement('div');
       mount.appendChild(host);
       this._pl = new YT.Player(host, {
-        videoId: 'U7WpnYAKyEk',
-        playerVars: { controls: 0, rel: 0, modestbranding: 1, playsinline: 1, iv_load_policy: 3, fs: 0, disablekb: 1, cc_load_policy: 0, showinfo: 0, annotations: 0 },
+        videoId: this.vid(),
+        playerVars: { controls: 0, rel: 0, modestbranding: 1, playsinline: 1, iv_load_policy: 3, fs: 0, disablekb: 1, cc_load_policy: 0, showinfo: 0, annotations: 0, vq: 'hd1080' },
         events: {
           onReady: (ev) => {
             const f = ev.target.getIframe();
-            // oversize + centre so YouTube's title bar and end-card chrome sit outside the frame
-            // oversized + centred so YouTube's title bar and buttons sit outside the frame
+            // oversized + centred so YouTube's title bar and end-card chrome sit outside the frame
             if (f) f.style.cssText = 'position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:100%;height:calc(100% + 240px);border:0;pointer-events:none;';
             this.killCaptions();
+            try { ev.target.setPlaybackQuality('hd1080'); } catch (e) {}
             this.setState({ duration: ev.target.getDuration() || 0 });
           },
         },
       });
     };
     init();
-    // drive all UI off the player's own state — no ready-flag gate
+    if (this._poll) return;
     this._poll = setInterval(() => {
       const p = this.player();
       if (!p || !p.getPlayerState) return;
@@ -230,33 +247,38 @@ class Component extends DCLogic {
     try { p.setOption('captions', 'track', {}); } catch (e) {}
     try { p.setOption('cc', 'track', {}); } catch (e) {}
   }
-  componentWillUnmount() { clearInterval(this._t); clearInterval(this._poll); if (this._pl && this._pl.destroy) this._pl.destroy(); }
+  componentWillUnmount() { clearTimeout(this._idle); clearInterval(this._t); clearInterval(this._poll); if (this._pl && this._pl.destroy) this._pl.destroy(); }
   _fmt(s) { s = Math.max(0, Math.floor(s || 0)); return Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0'); }
   renderVals() {
     const st = this.state;
+    const hasVid = !!this.vid();
     return {
       clock: st.clock,
       playerWrapRef: this._wrapRef, mountRef: this._mountRef,
-      showBigPlay: !st.started, showPoster: !st.started,
+      showGallery: this.props.showGallery ?? true,
+      showNotes: this.props.showNotes ?? false,
+      hideNotes: !(this.props.showNotes ?? false),
+      hasVid, showBigPlay: hasVid && !st.started, showPoster: !hasVid || !st.started,
       playGlyph: st.playing ? '\u275A\u275A' : '\u25B6',
       muteLabel: st.muted ? 'Sound off' : 'Sound on',
       timecode: this._fmt(st.current) + ' / ' + this._fmt(st.duration),
-      barStyle: { position: 'absolute', left: 0, right: 0, bottom: 0, zIndex: 2, display: 'flex', alignItems: 'center', gap: '16px', padding: '12px 16px', background: 'rgba(10,10,10,0.72)', borderTop: '1px solid #1f1f1f', backdropFilter: 'blur(12px)', opacity: st.started && st.hoverPlayer ? 1 : 0, pointerEvents: st.started && st.hoverPlayer ? 'auto' : 'none', transition: 'opacity 200ms cubic-bezier(0.2,0.7,0.2,1)' },
-      playerEnter: () => this.setState({ hoverPlayer: true }),
-      playerLeave: () => this.setState({ hoverPlayer: false }),
+      barStyle: { position: 'absolute', left: 0, right: 0, bottom: 0, zIndex: 2, display: 'flex', alignItems: 'center', gap: '16px', padding: '12px 16px', background: 'rgba(10,10,10,0.72)', borderTop: '1px solid #1f1f1f', backdropFilter: 'blur(12px)', opacity: hasVid && st.started && st.hoverPlayer ? 1 : 0, pointerEvents: hasVid && st.started && st.hoverPlayer ? 'auto' : 'none', transition: st.hoverPlayer ? 'opacity 200ms cubic-bezier(0.2,0.7,0.2,1)' : 'none' },
+      playerEnter: () => {
+        if (!this.state.hoverPlayer) this.setState({ hoverPlayer: true });
+        clearTimeout(this._idle);
+        this._idle = setTimeout(() => { if (this.state.playing) this.setState({ hoverPlayer: false }); }, 1500);
+      },
+      playerLeave: () => { clearTimeout(this._idle); this.setState({ hoverPlayer: false }); },
       progressStyle: { position: 'absolute', left: 0, height: '2px', background: '#d70015', width: (st.duration ? (st.current / st.duration) * 100 : 0) + '%' },
       togglePlay: () => {
+        clearTimeout(this._idle); if (this.state.hoverPlayer) this.setState({ hoverPlayer: false });
         const p = this.player(); if (!p) return;
-        if (this.state.playing && this.state.started) { p.pauseVideo(); return; }
-        // start muted (always allowed), then lift the mute — if the browser blocks
-        // sound-on playback we fall back to silent rather than stalling
+        if (this.state.playing && this.state.started) { this.setState({ playing: false }); p.pauseVideo(); return; }
         // start with sound on; if the browser refuses, fall back to muted playback
         if (!this.state.muted) p.unMute();
         p.playVideo();
         this.killCaptions();
         this.setState({ playing: true, started: true });
-        // only fall back to muted if playback is genuinely refused —
-        // BUFFERING (3) and PLAYING (1) are both fine, however slow the start
         setTimeout(() => {
           const q = this.player(); if (!q || this.state.muted) return;
           const s = q.getPlayerState();
@@ -270,6 +292,7 @@ class Component extends DCLogic {
     };
   }
 }
+
 </script>
 </body>
 </html>
