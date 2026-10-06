@@ -5,8 +5,7 @@ Portfolio site. Static HTML — no build step, no dependencies to install.
 ## What's here
 
 ```
-index.html                          entry point (redirects to the landing page)
-Andrew Caso Landing - Combined.dc.html   landing page
+index.html                          landing page (site home)
 About.dc.html  Contact.dc.html
 Commercial/          index + 14 project pages (13 visible) + template
 Music Videos/        index + 23 project pages + template
